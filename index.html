@@ -449,7 +449,9 @@
 <h1 id="demo-data-science-template">Demo data science template</h1>
 <p><a href="https://python-poetry.org/"><img alt="Poetry" src="https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json" /></a>
 <a href="https://github.com/charliermarsh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json" /></a>
-<a href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a></p>
+<a href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a>
+<a href="https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml"><img alt="Test" src="https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml/badge.svg?branch=main" /></a>
+<a href="https://codecov.io/gh/JoseRZapata/demo-data-science-template"><img alt="codecov" src="https://codecov.io/gh/JoseRZapata/demo-data-science-template/graph/badge.svg?token=PpCcK9jKy9" /></a></p>
 <hr />
 <p>This demo of a data science project is created using the template from <a href="https://github.com/JoseRZapata">@JoseRZapata</a>'s <a href="https://github.com/JoseRZapata/data-science-project-template">data science project template</a> which have all the necessary tools for experiment, development, testing, and deployment data science From notebooks to production.</p>
 <blockquote>
@@ -509,235 +511,233 @@
 </span></code></pre></div>
 <h2 id="data-science-code-structure">Data Science Code structure</h2>
 <h3 id="orchestrated-experiment">Orchestrated experiment</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>flowchart TD
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  subgraph input [ETL]
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    %%nodes
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    A1[(Data web)]
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    B[Process_etl]
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    BB1{{Data integrity}}
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    BB2{{Data Validation}}
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    Dcheck[(Data Checked)]
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    %%links
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    A1 ==&gt;B
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    B ==&gt; BB1 ==&gt; BB2 ==&gt; Dcheck[(Data Checked)]
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  end
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  subgraph split [Train / Test data split]
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    %%nodes
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    C[Split - Train /Test]
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    C1[(Train)]
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    C2[(Test)]
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    CC{{Train / Test Validation}}
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    %%links
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    Dcheck ==&gt; C
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    C --&gt; |data test|C2
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    C --&gt; |data train|C1
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    C2 &amp; C1 --&gt; CC
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>  end
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>  subgraph train_feature [Train Feature Engineering]
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    %%nodes
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    D[&lt;b&gt;Pre - process Train&lt;/b&gt; &lt;br&gt; Not needed in test &lt;br&gt; Ex:  Remove outliers, Duplicated, Drops]
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    subgraph feature [Feature Engineering pipeline &lt;br&gt; for use in train and test]
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>      style feature fill:grey,stroke:#333,stroke-width:2px
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>      %%nodes
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>      E[&lt;b&gt;Initial Processing&lt;/b&gt; &lt;br&gt; Ex: Casting, New columns, Replace empty values for NaN]
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>      F{Split &lt;br&gt; Data Type}
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>      G1[Transformation &lt;br&gt; Numerics &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>      G2[Transformation &lt;br&gt; Categoric &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>      G3[Transformation &lt;br&gt; Booleans &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>      G4[Transformation &lt;br&gt; Dates &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>      G5[Transformation &lt;br&gt; Strings &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>      H[&lt;b&gt;Final Processing&lt;/b&gt; &lt;br&gt; Final Pipeline &lt;br&gt; ColumnTranformer &lt;br&gt; and last transforms]
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>      TRfit[Train Transformer]
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>      TRdb[(Transformer &lt;br&gt; Pipeline)]
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>      %%links
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>      E -.-&gt; F
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>      F -.-&gt;|Numeric|G1
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>      F -.-&gt;|Categoric|G2
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>      F -.-&gt;|Bool|G3
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>      F -.-&gt;|Dates|G4
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>      F -.-&gt;|Strings|G5
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>      G1 &amp; G2 &amp; G3 &amp; G4 &amp; G5 -.-&gt; H
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>      H -.-&gt; |objeto pipeline|TRfit
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>      TRfit -.-&gt; |objeto pipeline|TRdb
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>    end
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>    %%nodes
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>    I[&lt;b&gt;Post - Processing Train&lt;/b&gt; &lt;br&gt; Ej: Data Balance - smote, Drop duplicates &lt;br&gt; Not needed in test]
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>    %%links
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>    C1 ---&gt;D
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>    D --&gt; |X - data train &lt;br&gt; pre-processed|E
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>    D --&gt; |X - data train &lt;br&gt; pre-processed|TRfit
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>    TRfit --&gt; |X - data train &lt;br&gt; transformed|I
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>    D --&gt; |Y - data train &lt;br&gt; pre-processed|I
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>  end
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>  subgraph mod[Modeling]
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>    %%nodes
-</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>    J[Modeling]
-</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>    Modeldb[(Train Model &lt;br&gt; candidate)]
-</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
-</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>    %%links
-</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>    I ---&gt; |X - data train &lt;br&gt; post-processed|J
-</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>    I --&gt; |Y - data train &lt;br&gt; post-processed|J
-</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>    J -.-&gt; |Model Object| Modeldb
-</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>
-</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>  end
-</span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>
-</span><span id="__span-1-85"><a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>  subgraph pred [Prediction]
-</span><span id="__span-1-86"><a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>    %%nodes
-</span><span id="__span-1-87"><a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>    TRtest[Transformation &lt;br&gt; X - Data test]
-</span><span id="__span-1-88"><a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>    Pred_test[Prediction test]
-</span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>    Pred_train[Prediction train]
-</span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>    Pred_db[(Predictions)]
-</span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>
-</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>    %%links
-</span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>    C2 --&gt; |X - data test|TRtest
-</span><span id="__span-1-94"><a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>    TRdb -.-&gt;TRtest
-</span><span id="__span-1-95"><a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>    TRtest --&gt; |X - data test &lt;br&gt; transformed|Pred_test
-</span><span id="__span-1-96"><a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>    C2 --&gt; |Y - data test|Pred_test
-</span><span id="__span-1-97"><a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>    I --&gt; |X - data train &lt;br&gt; post-processed|Pred_train
-</span><span id="__span-1-98"><a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>    I --&gt; |Y - data train &lt;br&gt; post-processed|Pred_train
-</span><span id="__span-1-99"><a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>
-</span><span id="__span-1-100"><a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>    Modeldb -.-&gt; |model|Pred_train --&gt; Pred_db
-</span><span id="__span-1-101"><a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>    Modeldb -.-&gt; |model|Pred_test --&gt; Pred_db
-</span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>  end
-</span><span id="__span-1-103"><a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>
-</span><span id="__span-1-104"><a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>  subgraph eval [Evaluation]
-</span><span id="__span-1-105"><a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>    %%nodes
-</span><span id="__span-1-106"><a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>    Modelcheck{{Model validation}}
-</span><span id="__span-1-107"><a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>    M[Eval]
-</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>    N[(Score)]
-</span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>
-</span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>    %%links
-</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>
-</span><span id="__span-1-112"><a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>    I  --&gt; |X data train &lt;br&gt; post-processed|Modelcheck
-</span><span id="__span-1-113"><a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>    I  --&gt; |Y data train &lt;br&gt; post-processed|Modelcheck
-</span><span id="__span-1-114"><a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>    TRtest --&gt; |X - data test &lt;br&gt; transformed|Modelcheck
-</span><span id="__span-1-115"><a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a>    C2 --&gt; |Y - data test|Modelcheck
-</span><span id="__span-1-116"><a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a>    Modeldb -....-&gt; |model|Modelcheck
-</span><span id="__span-1-117"><a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>    Pred_db --&gt; M
-</span><span id="__span-1-118"><a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>    M -.-&gt;N
-</span><span id="__span-1-119"><a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>  end
-</span><span id="__span-1-120"><a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a>
-</span><span id="__span-1-121"><a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a>  %%links
-</span><span id="__span-1-122"><a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a>
-</span><span id="__span-1-123"><a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a>
-</span><span id="__span-1-124"><a id="__codelineno-1-124" name="__codelineno-1-124" href="#__codelineno-1-124"></a>  Modelcheck -..-&gt;  pass{Pass ?}
-</span><span id="__span-1-125"><a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a>  pass -.-&gt; |no|no((Alert!))
-</span><span id="__span-1-126"><a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>  pass -.-&gt; |yes|si(Execute modeling &lt;br&gt; with all data):::Passclass
-</span><span id="__span-1-127"><a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>
-</span><span id="__span-1-128"><a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>
-</span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>  %% Definine link styles
-</span><span id="__span-1-130"><a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a>  linkStyle default stroke:blue
-</span><span id="__span-1-131"><a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a>
-</span><span id="__span-1-132"><a id="__codelineno-1-132" name="__codelineno-1-132" href="#__codelineno-1-132"></a>  linkStyle 8,10,12,33,35,42,45,46 stroke:orange
-</span><span id="__span-1-133"><a id="__codelineno-1-133" name="__codelineno-1-133" href="#__codelineno-1-133"></a>  linkStyle 29,31,38,44 stroke:deepskyblue
-</span><span id="__span-1-134"><a id="__codelineno-1-134" name="__codelineno-1-134" href="#__codelineno-1-134"></a>  linkStyle 36,46 stroke:gold
-</span><span id="__span-1-135"><a id="__codelineno-1-135" name="__codelineno-1-135" href="#__codelineno-1-135"></a>
-</span><span id="__span-1-136"><a id="__codelineno-1-136" name="__codelineno-1-136" href="#__codelineno-1-136"></a>  %% Styling the title subgraph
-</span><span id="__span-1-137"><a id="__codelineno-1-137" name="__codelineno-1-137" href="#__codelineno-1-137"></a>  classDef Title stroke-width:0, color:#f66,  font-weight:bold, font-size: 24px;
-</span><span id="__span-1-138"><a id="__codelineno-1-138" name="__codelineno-1-138" href="#__codelineno-1-138"></a>
-</span><span id="__span-1-139"><a id="__codelineno-1-139" name="__codelineno-1-139" href="#__codelineno-1-139"></a>  class input,train_feature,feature,pred,mod,eval Title
-</span><span id="__span-1-140"><a id="__codelineno-1-140" name="__codelineno-1-140" href="#__codelineno-1-140"></a>
-</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141" href="#__codelineno-1-141"></a>
-</span><span id="__span-1-142"><a id="__codelineno-1-142" name="__codelineno-1-142" href="#__codelineno-1-142"></a>  %% Definine node styles
-</span><span id="__span-1-143"><a id="__codelineno-1-143" name="__codelineno-1-143" href="#__codelineno-1-143"></a>  classDef Objclass fill:#329cc1;
-</span><span id="__span-1-144"><a id="__codelineno-1-144" name="__codelineno-1-144" href="#__codelineno-1-144"></a>  classDef Checkclass fill:#EC5800;
-</span><span id="__span-1-145"><a id="__codelineno-1-145" name="__codelineno-1-145" href="#__codelineno-1-145"></a>  classDef Alertclass fill:#FF0000;
-</span><span id="__span-1-146"><a id="__codelineno-1-146" name="__codelineno-1-146" href="#__codelineno-1-146"></a>  classDef Passclass fill:#00CC88;
-</span><span id="__span-1-147"><a id="__codelineno-1-147" name="__codelineno-1-147" href="#__codelineno-1-147"></a>
-</span><span id="__span-1-148"><a id="__codelineno-1-148" name="__codelineno-1-148" href="#__codelineno-1-148"></a>  %% Assigning styles to nodes
-</span><span id="__span-1-149"><a id="__codelineno-1-149" name="__codelineno-1-149" href="#__codelineno-1-149"></a>  class C1,C2,Dcheck,TRdb,Modeldb,Pred_db,N Objclass;
-</span><span id="__span-1-150"><a id="__codelineno-1-150" name="__codelineno-1-150" href="#__codelineno-1-150"></a>  class BB1,BB2,CC,Modelcheck Checkclass;
-</span><span id="__span-1-151"><a id="__codelineno-1-151" name="__codelineno-1-151" href="#__codelineno-1-151"></a>  class no Alertclass;
-</span><span id="__span-1-152"><a id="__codelineno-1-152" name="__codelineno-1-152" href="#__codelineno-1-152"></a>  class si Passclass;
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+  subgraph input [ETL]
+    %%nodes
+    A1[(Data web)]
+    B[Process_etl]
+    BB1{{Data integrity}}
+    BB2{{Data Validation}}
+    Dcheck[(Data Checked)]
+
+    %%links
+    A1 ==&gt;B
+    B ==&gt; BB1 ==&gt; BB2 ==&gt; Dcheck[(Data Checked)]
+  end
+
+  subgraph split [Train / Test data split]
+    %%nodes
+    C[Split - Train /Test]
+    C1[(Train)]
+    C2[(Test)]
+    CC{{Train / Test Validation}}
+
+    %%links
+    Dcheck ==&gt; C
+    C --&gt; |data test|C2
+    C --&gt; |data train|C1
+    C2 &amp; C1 --&gt; CC
+  end
+
+  subgraph train_feature [Train Feature Engineering]
+    %%nodes
+    D[&lt;b&gt;Pre - process Train&lt;/b&gt; &lt;br&gt; Not needed in test &lt;br&gt; Ex:  Remove outliers, Duplicated, Drops]
+
+
+    subgraph feature [Feature Engineering pipeline &lt;br&gt; for use in train and test]
+      style feature fill:grey,stroke:#333,stroke-width:2px
+      %%nodes
+      E[&lt;b&gt;Initial Processing&lt;/b&gt; &lt;br&gt; Ex: Casting, New columns, Replace empty values for NaN]
+      F{Split &lt;br&gt; Data Type}
+      G1[Transformation &lt;br&gt; Numerics &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G2[Transformation &lt;br&gt; Categoric &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G3[Transformation &lt;br&gt; Booleans &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G4[Transformation &lt;br&gt; Dates &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G5[Transformation &lt;br&gt; Strings &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      H[&lt;b&gt;Final Processing&lt;/b&gt; &lt;br&gt; Final Pipeline &lt;br&gt; ColumnTranformer &lt;br&gt; and last transforms]
+      TRfit[Train Transformer]
+      TRdb[(Transformer &lt;br&gt; Pipeline)]
+      %%links
+      E -.-&gt; F
+      F -.-&gt;|Numeric|G1
+      F -.-&gt;|Categoric|G2
+      F -.-&gt;|Bool|G3
+      F -.-&gt;|Dates|G4
+      F -.-&gt;|Strings|G5
+      G1 &amp; G2 &amp; G3 &amp; G4 &amp; G5 -.-&gt; H
+
+      H -.-&gt; |objeto pipeline|TRfit
+      TRfit -.-&gt; |objeto pipeline|TRdb
+    end
+
+    %%nodes
+    I[&lt;b&gt;Post - Processing Train&lt;/b&gt; &lt;br&gt; Ej: Data Balance - smote, Drop duplicates &lt;br&gt; Not needed in test]
+
+    %%links
+    C1 ---&gt;D
+    D --&gt; |X - data train &lt;br&gt; pre-processed|E
+    D --&gt; |X - data train &lt;br&gt; pre-processed|TRfit
+    TRfit --&gt; |X - data train &lt;br&gt; transformed|I
+    D --&gt; |Y - data train &lt;br&gt; pre-processed|I
+
+  end
+
+  subgraph mod[Modeling]
+
+    %%nodes
+    J[Modeling]
+    Modeldb[(Train Model &lt;br&gt; candidate)]
+
+    %%links
+    I ---&gt; |X - data train &lt;br&gt; post-processed|J
+    I --&gt; |Y - data train &lt;br&gt; post-processed|J
+    J -.-&gt; |Model Object| Modeldb
+
+  end
+
+  subgraph pred [Prediction]
+    %%nodes
+    TRtest[Transformation &lt;br&gt; X - Data test]
+    Pred_test[Prediction test]
+    Pred_train[Prediction train]
+    Pred_db[(Predictions)]
+
+    %%links
+    C2 --&gt; |X - data test|TRtest
+    TRdb -.-&gt;TRtest
+    TRtest --&gt; |X - data test &lt;br&gt; transformed|Pred_test
+    C2 --&gt; |Y - data test|Pred_test
+    I --&gt; |X - data train &lt;br&gt; post-processed|Pred_train
+    I --&gt; |Y - data train &lt;br&gt; post-processed|Pred_train
+
+    Modeldb -.-&gt; |model|Pred_train --&gt; Pred_db
+    Modeldb -.-&gt; |model|Pred_test --&gt; Pred_db
+  end
+
+  subgraph eval [Evaluation]
+    %%nodes
+    Modelcheck{{Model validation}}
+    M[Eval]
+    N[(Score)]
+
+    %%links
+
+    I  --&gt; |X data train &lt;br&gt; post-processed|Modelcheck
+    I  --&gt; |Y data train &lt;br&gt; post-processed|Modelcheck
+    TRtest --&gt; |X - data test &lt;br&gt; transformed|Modelcheck
+    C2 --&gt; |Y - data test|Modelcheck
+    Modeldb -....-&gt; |model|Modelcheck
+    Pred_db --&gt; M
+    M -.-&gt;N
+  end
+
+  %%links
+
+
+  Modelcheck -..-&gt;  pass{Pass ?}
+  pass -.-&gt; |no|no((Alert!))
+  pass -.-&gt; |yes|si(Execute modeling &lt;br&gt; with all data):::Passclass
+
+
+  %% Definine link styles
+  linkStyle default stroke:blue
+
+  linkStyle 8,10,12,33,35,42,45,46 stroke:orange
+  linkStyle 29,31,38,44 stroke:deepskyblue
+  linkStyle 36,46 stroke:gold
+
+  %% Styling the title subgraph
+  classDef Title stroke-width:0, color:#f66,  font-weight:bold, font-size: 24px;
+
+  class input,train_feature,feature,pred,mod,eval Title
+
+
+  %% Definine node styles
+  classDef Objclass fill:#329cc1;
+  classDef Checkclass fill:#EC5800;
+  classDef Alertclass fill:#FF0000;
+  classDef Passclass fill:#00CC88;
+
+  %% Assigning styles to nodes
+  class C1,C2,Dcheck,TRdb,Modeldb,Pred_db,N Objclass;
+  class BB1,BB2,CC,Modelcheck Checkclass;
+  class no Alertclass;
+  class si Passclass;</code></pre>
 <h3 id="deployment">Deployment</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>flowchart TD
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  orch_exp[Orchestrated Experiment] -.-&gt; Modelcheck
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  Modelcheck{{Model validation}}:::Checkclass -.-&gt; |si| input
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  Modelcheck -.-&gt; |no|stop((Alert! &lt;br&gt; Stop)):::Alertclass
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  subgraph input [ETL]
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>   Dcheck[(Data Checked)]:::Objclass
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  end
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  Dcheck ==&gt;  D[&lt;b&gt;Pre - processing&lt;/b&gt;]
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  subgraph train_feature [Train Feature Engineering]
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    %%nodes
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    D[&lt;b&gt;Pre - processing Train&lt;/b&gt; &lt;br&gt; Not needed in test &lt;br&gt; Ej: Drop outliers, Duplicates, Drops]
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    subgraph feature [Feature Engineering pipeline &lt;br&gt; for use in train and test]
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>      style feature fill:grey,stroke:#333,stroke-width:2px
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>      %%nodes
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>      E[&lt;b&gt;Initial Processing &lt;/b&gt; &lt;br&gt; Ej: Casting, New columns, Replace empty values for NaN]
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>      F{Split &lt;br&gt; Data Type}
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>      G1[Transformation &lt;br&gt; Numerics &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>      G2[Transformation &lt;br&gt; Categoric &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>      G3[Transformation &lt;br&gt; Booleans &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>      G4[Transformation &lt;br&gt; Dates &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>      G5[Transformation &lt;br&gt; Strings &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>      H[&lt;b&gt;Processing Final&lt;/b&gt; &lt;br&gt; Final Pipeline &lt;br&gt; ColumnTranformer &lt;br&gt;  and final transforms]
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>      TRfit[Train Transformer]
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>      %%links
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>      E -.-&gt; F
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>      F -.-&gt;|Numeric|G1
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>      F -.-&gt;|Categoric|G2
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>      F -.-&gt;|Bool|G3
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>      F -.-&gt;|Dates|G4
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>      F -.-&gt;|Strings|G5
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>      G1 &amp; G2 &amp; G3 &amp; G4 &amp; G5 -.-&gt; H
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>      H -.-&gt; |objeto pipeline|TRfit
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>    end
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>    %%nodes
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>    I[&lt;b&gt;Post - Processing Train&lt;/b&gt; &lt;br&gt; Ej: Data Balance - smote, dorp duplicates &lt;br&gt; Not needed in test]
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>    %%links
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>    D --&gt; |X - data train &lt;br&gt; pre-processed|E
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>    D --&gt; |X - data train &lt;br&gt; pre-processed|TRfit
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>    TRfit --&gt; |X - data train &lt;br&gt; transformed|I
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>    D --&gt; |Y - data train &lt;br&gt; pre-processed|I
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>  end
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>  subgraph mod[Modeling]
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>    J[Train]
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>  end
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>  subgraph artefacto[Artefacto de salida]
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>    TRfit -.-&gt; |pipeline object|TRdb[(Transformer &lt;br&gt; Pipeline)]:::Objclass
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>    J -.-&gt; |model object| Modeldb[(Train Model &lt;br&gt; Final)]:::Objclass
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>  end
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>  I --&gt; |data post-processed|mod
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>  J -.-&gt;N[(Performance &lt;br&gt; Score)]:::Objclass
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>  N -.-&gt; Scorecheck{{Performance validation &lt;br&gt; Score actual vs anteriores}}:::Checkclass
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>  Scorecheck -.-&gt;  pass{Pass ?}
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>  pass -.-&gt; |no|no((Alert!)):::Alertclass
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>  pass -.-&gt; |yes|si(Send Artifact to Deploy):::Passclass
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>  si -.-&gt; artefacto
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>  linkStyle 19 stroke:deepskyblue
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>  classDef Objclass fill:#329cc1;
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>  classDef Checkclass fill:#EC5800;
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>  classDef Alertclass fill:#FF0000;
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>  classDef Passclass fill:#00CC88;
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+  orch_exp[Orchestrated Experiment] -.-&gt; Modelcheck
+  Modelcheck{{Model validation}}:::Checkclass -.-&gt; |si| input
+  Modelcheck -.-&gt; |no|stop((Alert! &lt;br&gt; Stop)):::Alertclass
+  subgraph input [ETL]
+   Dcheck[(Data Checked)]:::Objclass
+  end
+  Dcheck ==&gt;  D[&lt;b&gt;Pre - processing&lt;/b&gt;]
+
+  subgraph train_feature [Train Feature Engineering]
+    %%nodes
+    D[&lt;b&gt;Pre - processing Train&lt;/b&gt; &lt;br&gt; Not needed in test &lt;br&gt; Ej: Drop outliers, Duplicates, Drops]
+
+
+    subgraph feature [Feature Engineering pipeline &lt;br&gt; for use in train and test]
+      style feature fill:grey,stroke:#333,stroke-width:2px
+      %%nodes
+      E[&lt;b&gt;Initial Processing &lt;/b&gt; &lt;br&gt; Ej: Casting, New columns, Replace empty values for NaN]
+      F{Split &lt;br&gt; Data Type}
+      G1[Transformation &lt;br&gt; Numerics &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G2[Transformation &lt;br&gt; Categoric &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G3[Transformation &lt;br&gt; Booleans &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G4[Transformation &lt;br&gt; Dates &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      G5[Transformation &lt;br&gt; Strings &lt;br&gt; &lt;s&gt;No Drops&lt;/s&gt;]
+      H[&lt;b&gt;Processing Final&lt;/b&gt; &lt;br&gt; Final Pipeline &lt;br&gt; ColumnTranformer &lt;br&gt;  and final transforms]
+      TRfit[Train Transformer]
+      %%links
+      E -.-&gt; F
+      F -.-&gt;|Numeric|G1
+      F -.-&gt;|Categoric|G2
+      F -.-&gt;|Bool|G3
+      F -.-&gt;|Dates|G4
+      F -.-&gt;|Strings|G5
+      G1 &amp; G2 &amp; G3 &amp; G4 &amp; G5 -.-&gt; H
+
+      H -.-&gt; |objeto pipeline|TRfit
+    end
+
+    %%nodes
+    I[&lt;b&gt;Post - Processing Train&lt;/b&gt; &lt;br&gt; Ej: Data Balance - smote, dorp duplicates &lt;br&gt; Not needed in test]
+
+    %%links
+
+    D --&gt; |X - data train &lt;br&gt; pre-processed|E
+    D --&gt; |X - data train &lt;br&gt; pre-processed|TRfit
+    TRfit --&gt; |X - data train &lt;br&gt; transformed|I
+    D --&gt; |Y - data train &lt;br&gt; pre-processed|I
+
+  end
+
+  subgraph mod[Modeling]
+    J[Train]
+  end
+
+  subgraph artefacto[Artefacto de salida]
+    TRfit -.-&gt; |pipeline object|TRdb[(Transformer &lt;br&gt; Pipeline)]:::Objclass
+    J -.-&gt; |model object| Modeldb[(Train Model &lt;br&gt; Final)]:::Objclass
+  end
+
+  I --&gt; |data post-processed|mod
+  J -.-&gt;N[(Performance &lt;br&gt; Score)]:::Objclass
+
+  N -.-&gt; Scorecheck{{Performance validation &lt;br&gt; Score actual vs anteriores}}:::Checkclass
+  Scorecheck -.-&gt;  pass{Pass ?}
+  pass -.-&gt; |no|no((Alert!)):::Alertclass
+  pass -.-&gt; |yes|si(Send Artifact to Deploy):::Passclass
+  si -.-&gt; artefacto
+
+  linkStyle 19 stroke:deepskyblue
+
+  classDef Objclass fill:#329cc1;
+  classDef Checkclass fill:#EC5800;
+  classDef Alertclass fill:#FF0000;
+  classDef Passclass fill:#00CC88;</code></pre>
 <h2 id="credits">Credits</h2>
 <p>This project was generated from <a href="https://github.com/JoseRZapata">@JoseRZapata</a>'s <a href="https://github.com/JoseRZapata/data-science-project-template">data science project template</a> template.</p>
 <hr />
