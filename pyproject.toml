@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "Demo data science template"
 version = "0.1.0"
-description = "Demo of a data sience proyect using de data sicente template https://github.com/JoseRZapata/data-science-project-template"
+description = "Demo of a data science proyect using de data science template https://github.com/JoseRZapata/data-science-project-template"
 authors = [
     "Jose R. Zapata <https://joserzapata.github.io/>",
 ]
@@ -12,6 +12,10 @@ repository = "https://github.com/JoseRZapata/demo-data-science-template"
 [tool.poetry.dependencies]
 python = "^3.11"
 hydra-core = "^1.1.1"
+pandas = {extras = ["parquet"], version = "^2.2.0"}
+numpy = "^1.26.4"
+scipy = "^1.12.0"
+scikit-learn = "^1.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -19,6 +23,9 @@ pre-commit = "^3.6.0"
 
 # Standardized Developer Workflow Orchestration
 cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
+jupyter = "^1.0.0"
+matplotlib = "^3.8.2"
+seaborn = "^0.13.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.0.0"
