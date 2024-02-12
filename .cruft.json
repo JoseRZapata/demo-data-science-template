@@ -1,0 +1,33 @@
+{
+  "template": "https://github.com/JoseRZapata/data-science-project-template",
+  "commit": "a5c8c6782d471aef3f8937d265f5ffa86cac2644",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "Demo data science template",
+      "repo_name": "demo-data-science-template",
+      "github_username": "JoseRZapata",
+      "author_name": "Jose R. Zapata",
+      "author_email": "https://joserzapata.github.io/",
+      "description": "Demo of a data sience proyect using de data sicente template https://github.com/JoseRZapata/data-science-project-template",
+      "compatible_python_versions": "3.11",
+      "mkdocs": true,
+      "codecov": true,
+      "license": "MIT License",
+      "_copy_without_render": [
+        ".code_quality/*",
+        ".vscode/*",
+        "config/*",
+        "data/*",
+        "src/*",
+        "tests/*",
+        ".editorconfig",
+        ".pre-commit-config.yaml",
+        "codecov.yaml",
+        "docs/*"
+      ],
+      "_template": "https://github.com/JoseRZapata/data-science-project-template"
+    }
+  },
+  "directory": null
+}

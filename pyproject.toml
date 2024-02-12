@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "Demo data science template"
+version = "0.1.0"
+description = "Demo of a data sience proyect using de data sicente template https://github.com/JoseRZapata/data-science-project-template"
+authors = [
+    "Jose R. Zapata <https://joserzapata.github.io/>",
+]
+readme = "README.md"
+documentation = "https://JoseRZapata.github.io/demo-data-science-template"
+repository = "https://github.com/JoseRZapata/demo-data-science-template"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+hydra-core = "^1.1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.0"
+
+# Standardized Developer Workflow Orchestration
+cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.0.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
+
+#
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.5.7"
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+pymdown-extensions = "^10.7"
+#
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.virtualenvs]
+in-project = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.coverage.paths]
+source = ["src"]
