@@ -4,58 +4,12 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-## ✨ Features and Tools
+---
 
-Information about all the features and tools used in this project: <https://joserzapata.github.io/data-science-project-template/#features-and-tools>
+This demo of a data science project is created using the template from [@JoseRZapata]'s [data science project template] which have all the necessary tools for experiment, development, testing, and deployment data science From notebooks to production.
 
-Features                                     | Package  | Why?
- ---                                         | ---      | ---
-Dependencies and env                         | [Poetry] | [article](https://mathdatasimplified.com/2023/06/12/poetry-a-better-way-to-manage-python-dependencies/)
-Project configuration file                   | [Hydra]  |  [article](https://mathdatasimplified.com/2023/05/25/stop-hard-coding-in-a-data-science-project-use-configuration-files-instead/)
-Lint - Format, sort imports  (Code Quality)  | [Ruff] | [article](https://www.sicara.fr/blog-technique/boost-code-quality-ruff-linter)
-Static type checking                         | [Mypy] | [article](https://python.plainenglish.io/does-python-need-types-79753b88f521)
-code security                                | [bandit] | [article](https://blog.bytehackr.in/secure-your-python-code-with-bandit)
-Code quality & security each commit          | [pre-commit] | [article](https://dev.to/techishdeep/maximize-your-python-efficiency-with-pre-commit-a-complete-but-concise-guide-39a5)
-Test code                                    | [Pytest] | [article](https://realpython.com/pytest-python-testing/)
-Test coverage                                | [coverage.py] [codecov] | [article](https://martinxpn.medium.com/test-coverage-in-python-with-pytest-86-100-days-of-python-a3205c77296)
-Project Template                             | [Cruft] or [Cookiecutter] | [article](https://medium.com/@bctello8/standardizing-dbt-projects-at-scale-with-cookiecutter-and-cruft-20acc4dc3f74)
-Folder structure for data science projects   | [Data structure] | [article](https://towardsdatascience.com/the-importance-of-layered-thinking-in-data-engineering-a09f685edc71)
-Template for pull requests                   | [Pull Request template] | [article](https://www.awesomecodereviews.com/pull-request-template/)
-Template for notebooks                       | [Notebook template] |
-
-## Set up the environment
-
-1. Initialize git in local:
-
-    ```bash
-    make init_git
-    ```
-
-1. Set up the environment:
-
-    ```bash
-    make init_env
-    ```
-
-1. Install libraries for data science and machine learning:
-
-    ```bash
-    make install_data_libs
-    ```
-
-## Install dependencies
-
-Agfter init the environment to install a new package, run:
-
-```bash
-poetry add <package-name>
-```
-
-Example to install [plotly](https://plotly.com/python/) in dev group:
-
-```bash
-poetry add plotly -G dev
-```
+> [!WARNING]
+> 🚧 Work in progress 🚧, This is a demo project, It is only for educational purposes.
 
 ## 🗃️ Project structure
 
@@ -109,6 +63,244 @@ poetry add plotly -G dev
 └── .vscode                             # vscode configuration
     ├── extensions.json                 # list of recommended extensions
     └── settings.json                   # vscode settings
+```
+
+## Data Science Code structure
+
+### Orchestrated experiment
+
+```mermaid
+flowchart TD
+  subgraph input [ETL]
+    %%nodes
+    A1[(Data web)]
+    B[Process_etl]
+    BB1{{Data integrity}}
+    BB2{{Data Validation}}
+    Dcheck[(Data Checked)]
+
+    %%links
+    A1 ==>B
+    B ==> BB1 ==> BB2 ==> Dcheck[(Data Checked)]
+  end
+
+  subgraph split [Train / Test data split]
+    %%nodes
+    C[Split - Train /Test]
+    C1[(Train)]
+    C2[(Test)]
+    CC{{Train / Test Validation}}
+
+    %%links
+    Dcheck ==> C
+    C --> |data test|C2
+    C --> |data train|C1
+    C2 & C1 --> CC
+  end
+
+  subgraph train_feature [Train Feature Engineering]
+    %%nodes
+    D[<b>Pre - process Train</b> <br> Not needed in test <br> Ex:  Remove outliers, Duplicated, Drops]
+
+
+    subgraph feature [Feature Engineering pipeline <br> for use in train and test]
+      style feature fill:grey,stroke:#333,stroke-width:2px
+      %%nodes
+      E[<b>Initial Processing</b> <br> Ex: Casting, New columns, Replace empty values for NaN]
+      F{Split <br> Data Type}
+      G1[Transformation <br> Numerics <br> <s>No Drops</s>]
+      G2[Transformation <br> Categoric <br> <s>No Drops</s>]
+      G3[Transformation <br> Booleans <br> <s>No Drops</s>]
+      G4[Transformation <br> Dates <br> <s>No Drops</s>]
+      G5[Transformation <br> Strings <br> <s>No Drops</s>]
+      H[<b>Final Processing</b> <br> Final Pipeline <br> ColumnTranformer <br> and last transforms]
+      TRfit[Train Transformer]
+      TRdb[(Transformer <br> Pipeline)]
+      %%links
+      E -.-> F
+      F -.->|Numeric|G1
+      F -.->|Categoric|G2
+      F -.->|Bool|G3
+      F -.->|Dates|G4
+      F -.->|Strings|G5
+      G1 & G2 & G3 & G4 & G5 -.-> H
+
+      H -.-> |objeto pipeline|TRfit
+      TRfit -.-> |objeto pipeline|TRdb
+    end
+
+    %%nodes
+    I[<b>Post - Processing Train</b> <br> Ej: Data Balance - smote, Drop duplicates <br> Not needed in test]
+
+    %%links
+    C1 --->D
+    D --> |X - data train <br> pre-processed|E
+    D --> |X - data train <br> pre-processed|TRfit
+    TRfit --> |X - data train <br> transformed|I
+    D --> |Y - data train <br> pre-processed|I
+
+  end
+
+  subgraph mod[Modeling]
+
+    %%nodes
+    J[Modeling]
+    Modeldb[(Train Model <br> candidate)]
+
+    %%links
+    I ---> |X - data train <br> post-processed|J
+    I --> |Y - data train <br> post-processed|J
+    J -.-> |Model Object| Modeldb
+
+  end
+
+  subgraph pred [Prediction]
+    %%nodes
+    TRtest[Transformation <br> X - Data test]
+    Pred_test[Prediction test]
+    Pred_train[Prediction train]
+    Pred_db[(Predictions)]
+
+    %%links
+    C2 --> |X - data test|TRtest
+    TRdb -.->TRtest
+    TRtest --> |X - data test <br> transformed|Pred_test
+    C2 --> |Y - data test|Pred_test
+    I --> |X - data train <br> post-processed|Pred_train
+    I --> |Y - data train <br> post-processed|Pred_train
+
+    Modeldb -.-> |model|Pred_train --> Pred_db
+    Modeldb -.-> |model|Pred_test --> Pred_db
+  end
+
+  subgraph eval [Evaluation]
+    %%nodes
+    Modelcheck{{Model validation}}
+    M[Eval]
+    N[(Score)]
+
+    %%links
+
+    I  --> |X data train <br> post-processed|Modelcheck
+    I  --> |Y data train <br> post-processed|Modelcheck
+    TRtest --> |X - data test <br> transformed|Modelcheck
+    C2 --> |Y - data test|Modelcheck
+    Modeldb -....-> |model|Modelcheck
+    Pred_db --> M
+    M -.->N
+  end
+
+  %%links
+
+
+  Modelcheck -..->  pass{Pass ?}
+  pass -.-> |no|no((Alert!))
+  pass -.-> |yes|si(Execute modeling <br> with all data):::Passclass
+
+
+  %% Definine link styles
+  linkStyle default stroke:blue
+
+  linkStyle 8,10,12,33,35,42,45,46 stroke:orange
+  linkStyle 29,31,38,44 stroke:deepskyblue
+  linkStyle 36,46 stroke:gold
+
+  %% Styling the title subgraph
+  classDef Title stroke-width:0, color:#f66,  font-weight:bold, font-size: 24px;
+
+  class input,train_feature,feature,pred,mod,eval Title
+
+
+  %% Definine node styles
+  classDef Objclass fill:#329cc1;
+  classDef Checkclass fill:#EC5800;
+  classDef Alertclass fill:#FF0000;
+  classDef Passclass fill:#00CC88;
+
+  %% Assigning styles to nodes
+  class C1,C2,Dcheck,TRdb,Modeldb,Pred_db,N Objclass;
+  class BB1,BB2,CC,Modelcheck Checkclass;
+  class no Alertclass;
+  class si Passclass;
+```
+
+### Deployment
+
+```mermaid
+flowchart TD
+  orch_exp[Orchestrated Experiment] -.-> Modelcheck
+  Modelcheck{{Model validation}}:::Checkclass -.-> |si| input
+  Modelcheck -.-> |no|stop((Alert! <br> Stop)):::Alertclass
+  subgraph input [ETL]
+   Dcheck[(Data Checked)]:::Objclass
+  end
+  Dcheck ==>  D[<b>Pre - processing</b>]
+
+  subgraph train_feature [Train Feature Engineering]
+    %%nodes
+    D[<b>Pre - processing Train</b> <br> Not needed in test <br> Ej: Drop outliers, Duplicates, Drops]
+
+
+    subgraph feature [Feature Engineering pipeline <br> for use in train and test]
+      style feature fill:grey,stroke:#333,stroke-width:2px
+      %%nodes
+      E[<b>Initial Processing </b> <br> Ej: Casting, New columns, Replace empty values for NaN]
+      F{Split <br> Data Type}
+      G1[Transformation <br> Numerics <br> <s>No Drops</s>]
+      G2[Transformation <br> Categoric <br> <s>No Drops</s>]
+      G3[Transformation <br> Booleans <br> <s>No Drops</s>]
+      G4[Transformation <br> Dates <br> <s>No Drops</s>]
+      G5[Transformation <br> Strings <br> <s>No Drops</s>]
+      H[<b>Processing Final</b> <br> Final Pipeline <br> ColumnTranformer <br>  and final transforms]
+      TRfit[Train Transformer]
+      %%links
+      E -.-> F
+      F -.->|Numeric|G1
+      F -.->|Categoric|G2
+      F -.->|Bool|G3
+      F -.->|Dates|G4
+      F -.->|Strings|G5
+      G1 & G2 & G3 & G4 & G5 -.-> H
+
+      H -.-> |objeto pipeline|TRfit
+    end
+
+    %%nodes
+    I[<b>Post - Processing Train</b> <br> Ej: Data Balance - smote, dorp duplicates <br> Not needed in test]
+
+    %%links
+
+    D --> |X - data train <br> pre-processed|E
+    D --> |X - data train <br> pre-processed|TRfit
+    TRfit --> |X - data train <br> transformed|I
+    D --> |Y - data train <br> pre-processed|I
+
+  end
+
+  subgraph mod[Modeling]
+    J[Train]
+  end
+
+  subgraph artefacto[Artefacto de salida]
+    TRfit -.-> |pipeline object|TRdb[(Transformer <br> Pipeline)]:::Objclass
+    J -.-> |model object| Modeldb[(Train Model <br> Final)]:::Objclass
+  end
+
+  I --> |data post-processed|mod
+  J -.->N[(Performance <br> Score)]:::Objclass
+
+  N -.-> Scorecheck{{Performance validation <br> Score actual vs anteriores}}:::Checkclass
+  Scorecheck -.->  pass{Pass ?}
+  pass -.-> |no|no((Alert!)):::Alertclass
+  pass -.-> |yes|si(Send Artifact to Deploy):::Passclass
+  si -.-> artefacto
+
+  linkStyle 19 stroke:deepskyblue
+
+  classDef Objclass fill:#329cc1;
+  classDef Checkclass fill:#EC5800;
+  classDef Alertclass fill:#FF0000;
+  classDef Passclass fill:#00CC88;
 ```
 
 ## Credits
