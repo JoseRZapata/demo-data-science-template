@@ -3,7 +3,8 @@
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-
+[![Test](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/JoseRZapata/demo-data-science-template/graph/badge.svg?token=PpCcK9jKy9)](https://codecov.io/gh/JoseRZapata/demo-data-science-template)
 ---
 
 This demo of a data science project is created using the template from [@JoseRZapata]'s [data science project template] which have all the necessary tools for experiment, development, testing, and deployment data science From notebooks to production.
