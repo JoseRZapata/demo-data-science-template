@@ -28,7 +28,7 @@ matplotlib = "^3.8.2"
 seaborn = "^0.13.2"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.0.0"
+pytest = "^8.0.1"
 pytest-cov = "^4.1.0"
 pytest-mock = "^3.12.0"
 
