@@ -24,7 +24,7 @@ pre-commit = "^3.6.0"
 # Standardized Developer Workflow Orchestration
 cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
 jupyter = "^1.0.0"
-matplotlib = "^3.8.2"
+matplotlib = "^3.8.3"
 seaborn = "^0.13.2"
 
 [tool.poetry.group.test.dependencies]
