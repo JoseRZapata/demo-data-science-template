@@ -10,12 +10,12 @@ documentation = "https://JoseRZapata.github.io/demo-data-science-template"
 repository = "https://github.com/JoseRZapata/demo-data-science-template"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.11,<3.12"
 hydra-core = "^1.1.1"
 pandas = {extras = ["parquet"], version = "^2.2.0"}
-numpy = "^1.26.4"
-scipy = "^1.12.0"
 scikit-learn = "^1.4.1"
+scipy = "1.11.4"
+numpy = "1.25.2"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -25,7 +25,8 @@ pre-commit = "^3.6.2"
 cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
 jupyter = "^1.0.0"
 matplotlib = "^3.8.3"
-seaborn = "^0.13.2"
+ydata-profiling = {extras = ["notebook"], version = "^4.6.5"}
+seaborn = "0.12.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.0.2"
