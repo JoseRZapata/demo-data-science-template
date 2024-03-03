@@ -5,6 +5,10 @@ data/**
 !data/**/
 !data/README.md
 
+#just for this demo
+!data/01_raw/titanic_raw.parquet
+!data/02_intermediate/titanic_type_fixed.parquet
+
 # also keep all .gitkeep files
 !.gitkeep
 
