@@ -29,7 +29,7 @@ ydata-profiling = {extras = ["notebook"], version = "^4.6.5"}
 seaborn = "0.12.2"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.0.2"
+pytest = "^8.1.1"
 pytest-cov = "^4.1.0"
 pytest-mock = "^3.12.0"
 
