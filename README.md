@@ -1,8 +1,10 @@
 # Demo data science template
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/charliermarsh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![Test](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/JoseRZapata/demo-data-science-template/graph/badge.svg?token=PpCcK9jKy9)](https://codecov.io/gh/JoseRZapata/demo-data-science-template)
 ---
@@ -18,7 +20,6 @@ This demo of a data science project is created using the template from [@JoseRZa
 .
 ├── codecov.yml                         # configuration for codecov
 ├── .code_quality
-│   ├── bandit.yaml                     # bandit configuration
 │   ├── mypy.ini                        # mypy configuration
 │   └── ruff.toml                       # ruff configuration
 ├── data
@@ -39,30 +40,57 @@ This demo of a data science project is created using the template from [@JoseRZa
 │   │       └── action.yml              # github action to setup python environment
 │   ├── dependabot.md                   # github action to update dependencies
 │   ├── pull_request_template.md        # template for pull requests
-│   └── workflows
-│       ├── docs.yml                    # github action to build documentation (mkdocs)
-│       ├── pre-commit_autoupdate.yml   # github action update pre-commit hooks
-│       └── test.yml                    # github action to run tests
+│   └── workflows                       # github actions workflows
+│       ├── ci.yml                      # run continuous integration (tests, pre-commit, etc.)
+│       ├── dependency_review.yml       # review dependencies
+│       ├── docs.yml                    # build documentation (mkdocs)
+│       └── pre-commit_autoupdate.yml   # update pre-commit hooks
 ├── .gitignore                          # files to ignore in git
-├── Makefile                            # useful commands to setup environment,
+├── Makefile                            # useful commands to setup environment, run tests, etc.
 ├── models                              # store final models
 ├── notebooks
-│   ├── 1-data                          # notebooks for data extraction and cleaning
-│   ├── 2-exploration                   # notebooks for data exploration
-│   ├── 3-analysis                      # notebooks for data analysis
-│   ├── 4-feat_eng                      # notebooks for feature engineering
-│   ├── 5-models                        # notebooks for model training
-│   ├── 6-evaluation                    # notebooks for model evaluation
-│   ├── 7-deploy                        # notebooks for model deployment
+│   ├── 1-data                          # data extraction and cleaning
+│   ├── 2-exploration                   # exploratory data analysis (EDA)
+│   ├── 3-analysis                      # Statistical analysis, hypothesis testing.
+│   ├── 4-feat_eng                      # feature engineering (creation, selection, and transformation.)
+│   ├── 5-models                        # model training, experimentation, and hyperparameter tuning.
+│   ├── 6-evaluation                    # evaluation metrics, performance assessment
+│   ├── 7-deploy                        # model packaging, deployment strategies.
+│   ├── 8-reports                       # story telling, summaries and analysis conclusions.
 │   ├── notebook_template.ipynb         # template for notebooks
 │   └── README.md                       # information about the notebooks
 ├── .pre-commit-config.yaml             # configuration for pre-commit hooks
 ├── pyproject.toml                      # dependencies for poetry
 ├── README.md                           # description of your project
 ├── src                                 # source code for use in this project
+│   ├── libs                            # custom python scripts
+│   │   ├── data_etl                    # data extraction, transformation, and loading  
+│   │   ├── data_validation             # data validation  
+│   │   ├── feat_cleaning               # feature engineering data cleaning
+│   │   ├── feat_encoding               # feature engineering encoding
+│   │   ├── feat_imputation             # feature engineering imputation    
+│   │   ├── feat_new_features           # feature engineering new features
+│   │   ├── feat_pipelines              # feature engineering pipelines
+│   │   ├── feat_preprocess_strings     # feature engineering pre process strings
+│   │   ├── feat_scaling                # feature engineering scaling data
+│   │   ├── feat_selection              # feature engineering feature selection
+│   │   ├── feat_strings                # feature engineering strings
+│   │   ├── metrics                     # evaluation metrics
+│   │   ├── model                       # model training and prediction    
+│   │   ├── model_evaluation            # model evaluation
+│   │   ├── model_selection             # model selection
+│   │   ├── model_validation            # model validation
+│   │   └── reports                     # reports
+│   ├── pipelines
+│   │   ├── data_etl                    # data extraction, transformation, and loading
+│   │   ├── feature_engineering         # prepare data for modeling
+│   │   ├── model_evaluation            # evaluate model performance
+│   │   ├── model_prediction            # model predictions
+│   │   └── model_train                 # train models    
 ├── tests                               # test code for your project
 └── .vscode                             # vscode configuration
     ├── extensions.json                 # list of recommended extensions
+    ├── launch.json                     # vscode launch configuration
     └── settings.json                   # vscode settings
 ```
 
