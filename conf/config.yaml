@@ -1,5 +1,6 @@
 etl:
   url: https://www.openml.org/data/get_csv/16826755/phpMYEkMl
+  na_value: '?'
   use_columns:
     - pclass
     - survived
@@ -8,13 +9,21 @@ etl:
     - age
     - sibsp
     - parch
-    - ticket
     - fare
-    - cabin
     - embarked
-    - home.dest
+  cols_categoric:
+    - pclass
+    - sex
+    - embarked
+  cols_numeric_float:
+    - age
+    - fare
+  cols_numeric_int:
+    - sibsp
+    - parch
+  cols_boolean:
+    - survived
 
 data:
-  raw: data/01_raw/titanic_raw.parquet
-  processed: data/processed/processed.csv
-  final: data/final/final.csv
+  raw: data/01_raw/titanic_raw.csv
+  intermediate: data/02_intermediate/titanic_type_fixed.parquet
