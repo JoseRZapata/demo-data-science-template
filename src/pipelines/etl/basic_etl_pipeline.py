@@ -35,15 +35,16 @@ def data_transformation(cfg: DictConfig) -> None:
     - Save the intermediate data as parquet
 
     """
-
+    # Pandas indexing needs a list of columns, so cfg.etl.cols_categoric has to be
+    # converted to a list adding ._content -> cfg.etl.cols_categoric._content
     (
         pd.read_csv(cfg.data.raw)
         .pipe(
             data_type_conversion,
-            cat_columns=cfg.etl.cols_categoric,
-            float_columns=cfg.etl.cols_numeric_float,
-            int_columns=cfg.etl.cols_numeric_int,
-            bool_columns=cfg.etl.cols_boolean,
+            cat_columns=cfg.etl.cols_categoric._content,
+            float_columns=cfg.etl.cols_numeric_float._content,
+            int_columns=cfg.etl.cols_numeric_int._content,
+            bool_columns=cfg.etl.cols_boolean._content,
         )
         .to_parquet(cfg.data.intermediate, engine="pyarrow", index=False)
     )
