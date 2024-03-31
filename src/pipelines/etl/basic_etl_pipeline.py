@@ -17,9 +17,12 @@ from src.libs.data_etl.data_etl import data_type_conversion, download_csv_url
 
 @hydra.main(version_base=None, config_path="../../../conf", config_name="config")
 def get_data(cfg: DictConfig) -> None:
+    use_columns = list(cfg.features)
+    use_columns.append(str(cfg.target_column))
+
     download_csv_url(
         url=cfg.etl.url,
-        use_columns=cfg.etl.use_columns,
+        use_columns=use_columns,
         raw_path=cfg.data.raw,
         na_value=cfg.etl.na_value,
     )
@@ -41,10 +44,10 @@ def data_transformation(cfg: DictConfig) -> None:
         pd.read_csv(cfg.data.raw)
         .pipe(
             data_type_conversion,
-            cat_columns=cfg.etl.cols_categoric._content,
-            float_columns=cfg.etl.cols_numeric_float._content,
-            int_columns=cfg.etl.cols_numeric_int._content,
-            bool_columns=cfg.etl.cols_boolean._content,
+            cat_columns=cfg.cols_categoric._content,
+            float_columns=cfg.cols_numeric_float._content,
+            int_columns=cfg.cols_numeric_int._content,
+            bool_columns=cfg.cols_boolean._content,
         )
         .to_parquet(cfg.data.intermediate, engine="pyarrow", index=False)
     )
