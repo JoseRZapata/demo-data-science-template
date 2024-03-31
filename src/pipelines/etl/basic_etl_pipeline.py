@@ -40,10 +40,10 @@ def data_transformation(cfg: DictConfig) -> None:
         pd.read_csv(cfg.data.raw)
         .pipe(
             data_type_conversion,
-            cat_columns=cfg.etl.cat_columns,
-            float_columns=cfg.etl.float_columns,
-            int_columns=cfg.etl.int_columns,
-            bool_columns=cfg.etl.bool_columns,
+            cat_columns=cfg.etl.cols_categoric,
+            float_columns=cfg.etl.cols_numeric_float,
+            int_columns=cfg.etl.cols_numeric_int,
+            bool_columns=cfg.etl.cols_boolean,
         )
         .to_parquet(cfg.data.intermediate, engine="pyarrow", index=False)
     )
