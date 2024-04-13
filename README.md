@@ -5,7 +5,7 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
-[![Test](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/test.yml)
+[![CI](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/JoseRZapata/demo-data-science-template/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/JoseRZapata/demo-data-science-template/graph/badge.svg?token=PpCcK9jKy9)](https://codecov.io/gh/JoseRZapata/demo-data-science-template)
 ---
 
