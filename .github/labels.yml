@@ -11,8 +11,6 @@
 - name: ":interrobang: maybe-bug"
   color: "5fc1ce"
   description: "Something that might be a bug if more info is given"
-- name: ":jack_o_lantern: hacktoberfest"
-  color: "ffaa04"
 - name: ":mega: feedback"
   color: "ecef8d"
 - name: ":memo: docs"
