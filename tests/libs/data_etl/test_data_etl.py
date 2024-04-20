@@ -1,8 +1,7 @@
 import pandas as pd
 import pytest
+from libs.data_etl.data_etl import data_type_conversion, download_csv_url
 from pytest_mock import MockerFixture
-
-from src.libs.data_etl.data_etl import data_type_conversion, download_csv_url
 
 
 @pytest.fixture
