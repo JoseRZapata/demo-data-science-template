@@ -19,7 +19,23 @@ def mock_read_csv(mocker: MockerFixture) -> None:
     mocker.patch("src.libs.data_etl.data_etl.pd.read_csv", side_effect=mock_function)
 
 
-def test_download_csv_url(mock_read_csv: MockerFixture) -> None:
+@pytest.fixture
+def test_data() -> pd.DataFrame:
+    # Crear un DataFrame de prueba
+    data = pd.DataFrame(
+        {
+            "cat_column": ["a", "b", "c"],
+            "float_column": [1.1, 2.2, 3.3],
+            "int_column": [1, 2, 3],
+            "bool_column": [True, False, True],
+        }
+    )
+    return data
+
+
+def test_download_csv_url(
+    mock_read_csv: MockerFixture, test_data: pd.DataFrame
+) -> None:
     url = "https://example.com/data.csv"
     use_columns = ["column1", "column2"]
     raw_path = "data/01_raw/titanic_raw.csv"
@@ -33,17 +49,7 @@ def test_download_csv_url(mock_read_csv: MockerFixture) -> None:
     assert df_raw.columns.tolist() == use_columns
 
 
-def test_data_type_conversion() -> None:
-    # Crear un DataFrame de prueba
-    data = pd.DataFrame(
-        {
-            "cat_column": ["a", "b", "c"],
-            "float_column": [1.1, 2.2, 3.3],
-            "int_column": [1, 2, 3],
-            "bool_column": [True, False, True],
-        }
-    )
-
+def test_data_type_conversion(test_data: pd.DataFrame) -> None:
     # Definir las columnas para cada tipo de datos
     cat_columns = ["cat_column"]
     float_columns = ["float_column"]
@@ -52,7 +58,7 @@ def test_data_type_conversion() -> None:
 
     # Llamar a la función data_type_conversion
     converted_data = data_type_conversion(
-        data, cat_columns, float_columns, int_columns, bool_columns
+        test_data, cat_columns, float_columns, int_columns, bool_columns
     )
 
     # Verificar que los tipos de datos de las columnas son correctos
