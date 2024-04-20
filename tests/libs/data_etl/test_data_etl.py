@@ -1,7 +1,8 @@
 import pandas as pd
 import pytest
-from libs.data_etl.data_etl import data_type_conversion, download_csv_url
 from pytest_mock import MockerFixture
+
+from src.libs.data_etl.data_etl import data_type_conversion, download_csv_url
 
 
 @pytest.fixture
@@ -12,57 +13,74 @@ def mock_read_csv(mocker: MockerFixture) -> None:
         na_values: str | None = None,
         low_memory: bool | None = None,
     ) -> pd.DataFrame:
-        # Create a mock DataFrame for testing
-        data = {"column1": [1, 2, 3], "column2": ["a", "b", "c"]}
+        # Crear un DataFrame de prueba
+        data = {
+            "pclass": [1, 2, 3],
+            "name": ["John", "Jane", "Jack"],
+            "sex": ["male", "female", "male"],
+            "age": [30, 25, 35],
+            "sibsp": [1, 0, 1],
+            "parch": [0, 1, 1],
+            "fare": [100.0, 50.0, 25.0],
+            "embarked": ["C", "S", "Q"],
+            "survived": [1, 0, 1],
+        }
         return pd.DataFrame(data)
 
     mocker.patch("src.libs.data_etl.data_etl.pd.read_csv", side_effect=mock_function)
 
 
-@pytest.fixture
-def test_data() -> pd.DataFrame:
-    # Crear un DataFrame de prueba
-    data = pd.DataFrame(
-        {
-            "cat_column": ["a", "b", "c"],
-            "float_column": [1.1, 2.2, 3.3],
-            "int_column": [1, 2, 3],
-            "bool_column": [True, False, True],
-        }
-    )
-    return data
-
-
-def test_download_csv_url(
-    mock_read_csv: MockerFixture, test_data: pd.DataFrame
-) -> None:
+def test_download_csv_url(mocker: MockerFixture) -> None:
     url = "https://example.com/data.csv"
-    use_columns = ["column1", "column2"]
-    raw_path = "data/01_raw/titanic_raw.csv"
+    use_columns = [
+        "pclass",
+        "name",
+        "sex",
+        "age",
+        "sibsp",
+        "parch",
+        "fare",
+        "embarked",
+        "survived",
+    ]
+    raw_path = "data/01_raw/test_raw.csv"
     na_value = ""
+
+    # Mock pd.read_csv and DataFrame.to_csv
+    mock_read_csv = mocker.patch("pandas.read_csv", return_value=pd.DataFrame())
+    mocker.patch("pandas.DataFrame.to_csv", return_value=None)
 
     download_csv_url(url, use_columns, raw_path, na_value)
 
-    # Assert that the CSV file is saved correctly
-    df_raw = pd.read_csv(raw_path, usecols=use_columns)
-    assert df_raw.shape == (3, 2)
-    assert df_raw.columns.tolist() == use_columns
-
-
-def test_data_type_conversion(test_data: pd.DataFrame) -> None:
-    # Definir las columnas para cada tipo de datos
-    cat_columns = ["cat_column"]
-    float_columns = ["float_column"]
-    int_columns = ["int_column"]
-    bool_columns = ["bool_column"]
-
-    # Llamar a la función data_type_conversion
-    converted_data = data_type_conversion(
-        test_data, cat_columns, float_columns, int_columns, bool_columns
+    # Assert that pd.read_csv was called with the correct arguments
+    mock_read_csv.assert_called_once_with(
+        url, usecols=use_columns, na_values=na_value, low_memory=False
     )
 
-    # Verificar que los tipos de datos de las columnas son correctos
-    assert converted_data["cat_column"].dtype.name == "category"
-    assert converted_data["float_column"].dtype.name == "float64"
-    assert converted_data["int_column"].dtype.name == "int64"
-    assert converted_data["bool_column"].dtype.name == "bool"
+
+def test_data_type_conversion(mock_read_csv: MockerFixture) -> None:
+    # define column types
+    cat_columns = ["pclass", "sex", "embarked"]
+    float_columns = ["age", "fare"]
+    int_columns = ["sibsp", "parch"]
+    bool_columns = ["survived"]
+
+    # call function
+    test_data = pd.read_csv("data/01_raw/titanic_raw.csv")
+    converted_data = data_type_conversion(
+        test_data,
+        cat_columns,
+        float_columns,
+        int_columns,
+        bool_columns,
+    )
+
+    # check column data types
+    assert converted_data["pclass"].dtype.name == "category"
+    assert converted_data["sex"].dtype.name == "category"
+    assert converted_data["embarked"].dtype.name == "category"
+    assert converted_data["age"].dtype.name == "float64"
+    assert converted_data["fare"].dtype.name == "float64"
+    assert converted_data["sibsp"].dtype.name == "int64"
+    assert converted_data["parch"].dtype.name == "int64"
+    assert converted_data["survived"].dtype.name == "bool"
