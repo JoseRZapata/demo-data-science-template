@@ -1,9 +1,8 @@
 import pandas as pd
 import pytest
 from hydra import compose, initialize
+from pipelines.etl import basic_etl_pipeline
 from pytest_mock import MockerFixture
-
-from src.pipelines.etl import basic_etl_pipeline
 
 
 @pytest.fixture
@@ -23,7 +22,7 @@ def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> No
     )
 
     # Initialize Hydra and the config
-    with initialize(config_path=hydra_config_path):
+    with initialize(config_path=hydra_config_path, version_base="0.1"):
         cfg = compose(config_name="config")
 
     # Execute the pipeline
