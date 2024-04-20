@@ -48,8 +48,9 @@ jobs:
         #
       - name: Run pytest with coverage
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)
-          poetry run pytest --cov --cov-report=xml
+          PYTHONPATH=$(pwd)
+          export PYTHONPATH
+          poetry run pytest --cov --cov-report=xmll
 
         #
         #
