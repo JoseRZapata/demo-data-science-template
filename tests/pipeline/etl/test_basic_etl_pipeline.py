@@ -22,6 +22,9 @@ def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> No
         "src.pipelines.etl.basic_etl_pipeline.data_type_conversion"
     )
 
+    # Mock pd.read_csv to return a dummy DataFrame
+    mock_read_csv = mocker.patch("pandas.read_csv", return_value=pd.DataFrame())
+
     # Initialize Hydra and the config
     with initialize(config_path=hydra_config_path, version_base="1.1"):
         cfg = compose(config_name="config")
@@ -48,3 +51,6 @@ def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> No
         "int_columns": cfg.cols_numeric_int._content,
         "bool_columns": cfg.cols_boolean._content,
     }
+
+    # Check that pd.read_csv was called with the correct arguments
+    mock_read_csv.assert_called_once_with(cfg.data.raw)
