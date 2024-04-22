@@ -50,7 +50,7 @@ jobs:
         run: |
           PYTHONPATH=$(pwd)
           export PYTHONPATH
-          poetry run pytest --cov --cov-report=xmll
+          poetry run pytest --cov --cov-report=xml
 
         #
         #
