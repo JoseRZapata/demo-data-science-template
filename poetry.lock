@@ -1925,13 +1925,13 @@ mkdocs = ">=1.1"
 
 [[package]]
 name = "mkdocs-material"
-version = "9.5.17"
+version = "9.5.18"
 description = "Documentation that simply works"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mkdocs_material-9.5.17-py3-none-any.whl", hash = "sha256:14a2a60119a785e70e765dd033e6211367aca9fc70230e577c1cf6a326949571"},
-    {file = "mkdocs_material-9.5.17.tar.gz", hash = "sha256:06ae1275a72db1989cf6209de9e9ecdfbcfdbc24c58353877b2bb927dbe413e4"},
+    {file = "mkdocs_material-9.5.18-py3-none-any.whl", hash = "sha256:1e0e27fc9fe239f9064318acf548771a4629d5fd5dfd45444fd80a953fe21eb4"},
+    {file = "mkdocs_material-9.5.18.tar.gz", hash = "sha256:a43f470947053fa2405c33995f282d24992c752a50114f23f30da9d8d0c57e62"},
 ]
 
 [package.dependencies]
@@ -2313,6 +2313,7 @@ optional = false
 python-versions = ">=3.9"
 files = [
     {file = "pandas-2.2.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:90c6fca2acf139569e74e8781709dccb6fe25940488755716d1d354d6bc58bce"},
+    {file = "pandas-2.2.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c7adfc142dac335d8c1e0dcbd37eb8617eac386596eb9e1a1b77791cf2498238"},
     {file = "pandas-2.2.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4abfe0be0d7221be4f12552995e58723c7422c80a659da13ca382697de830c08"},
     {file = "pandas-2.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8635c16bf3d99040fdf3ca3db669a7250ddf49c55dc4aa8fe0ae0fa8d6dcc1f0"},
     {file = "pandas-2.2.2-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:40ae1dffb3967a52203105a077415a86044a2bea011b5f321c6aa64b379a3f51"},
@@ -2333,6 +2334,7 @@ files = [
     {file = "pandas-2.2.2-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:43498c0bdb43d55cb162cdc8c06fac328ccb5d2eabe3cadeb3529ae6f0517c32"},
     {file = "pandas-2.2.2-cp312-cp312-win_amd64.whl", hash = "sha256:d187d355ecec3629624fccb01d104da7d7f391db0311145817525281e2804d23"},
     {file = "pandas-2.2.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:0ca6377b8fca51815f382bd0b697a0814c8bda55115678cbc94c30aacbb6eff2"},
+    {file = "pandas-2.2.2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:9057e6aa78a584bc93a13f0a9bf7e753a5e9770a30b4d758b8d5f2a62a9433cd"},
     {file = "pandas-2.2.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:001910ad31abc7bf06f49dcc903755d2f7f3a9186c0c040b827e522e9cef0863"},
     {file = "pandas-2.2.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:66b479b0bd07204e37583c191535505410daa8df638fd8e75ae1b383851fe921"},
     {file = "pandas-2.2.2-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:a77e9d1c386196879aa5eb712e77461aaee433e54c68cf253053a73b7e49c33a"},
@@ -2882,17 +2884,17 @@ windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "pymdown-extensions"
-version = "10.7.1"
+version = "10.8"
 description = "Extension pack for Python Markdown."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pymdown_extensions-10.7.1-py3-none-any.whl", hash = "sha256:f5cc7000d7ff0d1ce9395d216017fa4df3dde800afb1fb72d1c7d3fd35e710f4"},
-    {file = "pymdown_extensions-10.7.1.tar.gz", hash = "sha256:c70e146bdd83c744ffc766b4671999796aba18842b268510a329f7f64700d584"},
+    {file = "pymdown_extensions-10.8-py3-none-any.whl", hash = "sha256:3539003ff0d5e219ba979d2dc961d18fcad5ac259e66c764482e8347b4c0503c"},
+    {file = "pymdown_extensions-10.8.tar.gz", hash = "sha256:91ca336caf414e1e5e0626feca86e145de9f85a3921a7bcbd32890b51738c428"},
 ]
 
 [package.dependencies]
-markdown = ">=3.5"
+markdown = ">=3.6"
 pyyaml = "*"
 
 [package.extras]
@@ -4348,4 +4350,4 @@ unicode = ["tangled-up-in-unicode (==0.2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11,<3.12"
-content-hash = "fd961d7f77c15026f8c300bd69acd22a3fdf9d23f25d57a9d84708146bb8dc24"
+content-hash = "cc8778e3dab4478ba1befb7a3df505ee3998a52b3f5f1d7473b469f3c4a51a11"
