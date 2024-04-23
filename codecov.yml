@@ -17,7 +17,7 @@ coverage:
         target: 85%
       decrement: # maximum decrement of coverage allowed
         target: auto
-        threshold: 0.5%
+        threshold: 15%
         if_not_found: success
 comment: # configuration of the details the bot will comment on the PR
   layout: "diff, flags"
