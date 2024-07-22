@@ -27,12 +27,12 @@ pre-commit = "^3.7.1"
 # Standardized Developer Workflow Orchestration
 cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
 jupyter = "^1.0.0"
-matplotlib = "^3.8.4"
+matplotlib = "^3.9.1"
 ydata-profiling = {extras = ["notebook"], version = "^4.8.3"}
 seaborn = "0.13.2"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.2.2"
+pytest = "^8.3.1"
 pytest-cov = "^5.0.0"
 pytest-mock = "^3.12.0"
 
