@@ -2082,13 +2082,13 @@ files = [
 
 [[package]]
 name = "mkdocstrings"
-version = "0.26.0"
+version = "0.26.1"
 description = "Automatic documentation from sources, for MkDocs."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mkdocstrings-0.26.0-py3-none-any.whl", hash = "sha256:1aa227fe94f88e80737d37514523aacd473fc4b50a7f6852ce41447ab23f2654"},
-    {file = "mkdocstrings-0.26.0.tar.gz", hash = "sha256:ff9d0de28c8fa877ed9b29a42fe407cfe6736d70a1c48177aa84fcc3dc8518cd"},
+    {file = "mkdocstrings-0.26.1-py3-none-any.whl", hash = "sha256:29738bfb72b4608e8e55cc50fb8a54f325dc7ebd2014e4e3881a49892d5983cf"},
+    {file = "mkdocstrings-0.26.1.tar.gz", hash = "sha256:bb8b8854d6713d5348ad05b069a09f3b79edbc6a0f33a34c6821141adb03fe33"},
 ]
 
 [package.dependencies]
@@ -4477,13 +4477,13 @@ pillow = "*"
 
 [[package]]
 name = "ydata-profiling"
-version = "4.9.0"
+version = "4.10.0"
 description = "Generate profile report for pandas DataFrame"
 optional = false
 python-versions = "<3.13,>=3.7"
 files = [
-    {file = "ydata-profiling-4.9.0.tar.gz", hash = "sha256:9c06cab742dfb929abf942752ff23eb690686e964dfa6c0c7e101982dc9c6b68"},
-    {file = "ydata_profiling-4.9.0-py2.py3-none-any.whl", hash = "sha256:af99ec835add3e1f26098a172571175fd1fec5f09d6d650785a620742f156a02"},
+    {file = "ydata-profiling-4.10.0.tar.gz", hash = "sha256:c36693d97b0641544e169e2022a95dd76d59faeeee87abcc41ea33b71d1d4817"},
+    {file = "ydata_profiling-4.10.0-py2.py3-none-any.whl", hash = "sha256:569231cd35f8f260829a96129ae3ed1a177ec879b290c2d6fdfde40fe993c5ed"},
 ]
 
 [package.dependencies]
@@ -4496,7 +4496,7 @@ jupyter = {version = ">=1.0.0", optional = true, markers = "extra == \"notebook\
 matplotlib = ">=3.5,<3.10"
 multimethod = ">=1.4,<2"
 numba = ">=0.56.0,<1"
-numpy = ">=1.16.0,<2"
+numpy = ">=1.16.0,<2.2"
 pandas = ">1.1,<1.4.0 || >1.4.0,<3"
 phik = ">=0.11.1,<0.13"
 pydantic = ">=2"
@@ -4508,7 +4508,7 @@ statsmodels = ">=0.13.2,<1"
 tqdm = ">=4.48.2,<5"
 typeguard = ">=3,<5"
 visions = {version = ">=0.7.5,<0.7.7", extras = ["type-image-path"]}
-wordcloud = ">=1.9.1"
+wordcloud = ">=1.9.3"
 
 [package.extras]
 notebook = ["ipywidgets (>=7.5.1)", "jupyter (>=1.0.0)"]
@@ -4517,4 +4517,4 @@ unicode = ["tangled-up-in-unicode (==0.2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11,<3.12"
-content-hash = "07d705b5701dc9b5f5e5683c6b668be9fcc065c3bb3a11c9b2b14e3a455f9449"
+content-hash = "611f23b3fdcd0dcb0bb318559dec308060a498704a1f83c8bf2e317c2e86a6f9"
