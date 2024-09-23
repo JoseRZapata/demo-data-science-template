@@ -40,9 +40,9 @@ pytest-mock = "^3.12.0"
 pandas-stubs = "^2.2.2.240909"
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"
-mkdocs-material = "^9.5.34"
+mkdocs-material = "^9.5.36"
 mkdocstrings = {extras = ["python"], version = "^0.26.1"}
-pymdown-extensions = "^10.9"
+pymdown-extensions = "^10.10"
 #
 
 [build-system]
