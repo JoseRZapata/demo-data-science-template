@@ -6,13 +6,19 @@
       "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.rulers": [88]
+    "editor.rulers": [100]
   },
   "notebook.formatOnSave.enabled": true,
   "notebook.defaultFormatter": "charliermarsh.ruff",
   "notebook.codeActionsOnSave": {
       "notebook.source.fixAll": "explicit",
       "notebook.source.organizeImports": "explicit"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
   },
   "files.exclude": {
     "**/__pycache__": true
