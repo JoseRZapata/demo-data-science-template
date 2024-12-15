@@ -6,9 +6,7 @@ Author: Jose R. Zapata <https://joserzapata.github.io/>
 import pandas as pd
 
 
-def download_csv_url(
-    url: str, use_columns: list, raw_path: str, na_value: str = ""
-) -> None:
+def download_csv_url(url: str, use_columns: list, raw_path: str, na_value: str = "") -> None:
     """Extract csv data from a given URL and save it as a parquet file.
     use_columns is a list of column names to use from the data.
 

@@ -13,9 +13,7 @@ def hydra_config_path() -> str:
 
 def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> None:
     # Import mock for the download_csv_url function
-    mock_download_csv_url = mocker.patch(
-        "src.pipelines.etl.basic_etl_pipeline.download_csv_url"
-    )
+    mock_download_csv_url = mocker.patch("src.pipelines.etl.basic_etl_pipeline.download_csv_url")
 
     # import mock for the data_type_conversion function
     mock_data_type_conversion = mocker.patch(
@@ -42,9 +40,7 @@ def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> No
     )
 
     args, kwargs = mock_data_type_conversion.call_args
-    assert isinstance(
-        args[0], pd.DataFrame
-    )  # check that the first argument is a DataFrame
+    assert isinstance(args[0], pd.DataFrame)  # check that the first argument is a DataFrame
     assert kwargs == {
         "cat_columns": cfg.cols_categoric._content,
         "float_columns": cfg.cols_numeric_float._content,
