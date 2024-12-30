@@ -25,7 +25,7 @@ deepchecks = "^0.19.1"
 pre-commit = "^4.0.1"
 
 # Standardized Developer Workflow Orchestration
-cruft = {extras = ["pyproject"], version = "^2.15.0"} # Automated Cookiecutter template synchronization
+cruft = {extras = ["pyproject"], version = "^2.16.0"} # Automated Cookiecutter template synchronization
 jupyter = "^1.1.1"
 matplotlib = "^3.9.4"
 ydata-profiling = {extras = ["notebook"], version = "^4.12.1"}
@@ -42,7 +42,7 @@ pandas-stubs = "^2.2.3.241126"
 mkdocs = "^1.6.1"
 mkdocs-material = "^9.5.49"
 mkdocstrings = {extras = ["python"], version = "^0.27.0"}
-pymdown-extensions = "^10.12"
+pymdown-extensions = "^10.13"
 #
 
 [build-system]
