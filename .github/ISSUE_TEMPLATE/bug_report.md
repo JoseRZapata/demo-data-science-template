@@ -29,7 +29,7 @@ If applicable, add screenshots to help explain your problem.
 - OS: [e.g. Linux Ubuntu 20.04, Windows 11, macOS Big Sur]
 - URL of repository: [e.g. https://github.com/JoseRZapata/demo-data-science-template]
 - Python Version [e.g. 3.10, 3.11]
-- UV version: [e.g. 0.5.13 ]
+- UV Version: [e.g. 0.5.13 ]
 - IDE: [e.g. VSCode, PyCharm, Jupyter Notebook]
 
 **Additional context**
