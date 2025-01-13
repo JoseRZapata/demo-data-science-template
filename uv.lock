@@ -600,12 +600,12 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "deepchecks", specifier = ">=0.19.1,<0.20" },
-    { name = "hydra-core", specifier = ">=1.1.1,<2" },
+    { name = "deepchecks", specifier = ">=0.19.1" },
+    { name = "hydra-core", specifier = ">=1.1.1" },
     { name = "numpy", specifier = ">=2.0.2" },
     { name = "pandas", specifier = ">=2.2.3" },
-    { name = "scikit-learn", specifier = ">=1.6.0,<2" },
-    { name = "scipy", specifier = ">=1.13.1,<2" },
+    { name = "scikit-learn", specifier = ">=1.6.0" },
+    { name = "scipy", specifier = ">=1.13.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -623,7 +623,7 @@ dev = [
     { name = "ydata-profiling", extras = ["notebooks"], specifier = ">=4.12.1" },
 ]
 docs = [
-    { name = "mkdocs", specifier = ">=1.6.1,<2" },
+    { name = "mkdocs", specifier = ">=1.6.1" },
     { name = "mkdocs-material", specifier = ">=9.5.49" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=0.27.0" },
     { name = "pymdown-extensions", specifier = "~=10.13" },
