@@ -30,6 +30,7 @@ dev = [
     "pytest-cov>=6.0.0",
     "pandas-stubs>=2.2.3.241126",
     "ydata-profiling[notebooks]>=4.12.1",
+    "pytest-mock>=3.14.0",
 ]
 docs = [
     "mkdocs>=1.6.1,<2",
