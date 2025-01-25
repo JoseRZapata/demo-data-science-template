@@ -1,6 +1,6 @@
 # Demo data science template
 
-[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/charliermarsh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
@@ -35,9 +35,6 @@ This demo of a data science project is created using the template from [@JoseRZa
 ├── docs                                # documentation for your project
 ├── .editorconfig                       # editor configuration
 ├── .github                             # github configuration
-│   ├── actions
-│   │   └── python-poetry-env
-│   │       └── action.yml              # github action to setup python environment
 │   ├── dependabot.md                   # github action to update dependencies
 │   ├── pull_request_template.md        # template for pull requests
 │   └── workflows                       # github actions workflows
@@ -60,7 +57,7 @@ This demo of a data science project is created using the template from [@JoseRZa
 │   ├── notebook_template.ipynb         # template for notebooks
 │   └── README.md                       # information about the notebooks
 ├── .pre-commit-config.yaml             # configuration for pre-commit hooks
-├── pyproject.toml                      # dependencies for poetry
+├── pyproject.toml                      # dependencies for the python project
 ├── README.md                           # description of your project
 ├── src                                 # source code for use in this project
 │   ├── libs                            # custom python scripts
@@ -346,27 +343,11 @@ This project was generated from [@JoseRZapata]'s [data science project template]
 [Cruft]: https://cruft.github.io/cruft/
 [data science project template]: https://github.com/JoseRZapata/data-science-project-template
 [Data structure]: demo-data-science-template/data/README.md
-[deepcheck]:https://deepcheck.io/
-[dependabot]: https://github.com/dependabot/dependabot-core
-[depy]:https://fpgmaas.github.io/deptry/
-[DVC]:https://dvc.org/
-[github actions]: https://github.com/features/actions
 [hydra]: https://hydra.cc/
-[Jupyter]:https://jupyter.org/
-[Makefile]: https://www.gnu.org/software/make/manual/make.html
-[MlFlow]:https://www.mlflow.org/
 [Mypy]: http://mypy-lang.org/
 [Notebook template]: demo-data-science-template/notebooks/notebook_template.ipynb
-[NumPy]:https://numpy.org/
-[OmegaConf]: https://omegaconf.readthedocs.io/en/latest/
-[Pandas]:https://pandas.pydata.org/
-[pandera]:(https://pandera.readthedocs.io/en/stable/)
-[Poetry]: https://python-poetry.org/
 [pre-commit]: https://pre-commit.com/
 [Pull Request template]: demo-data-science-template/.github/pull_request_template.md
-[Pyenv]: https://github.com/pyenv/pyenv
-[pypi]: https://pypi.org/
 [Pytest]: https://docs.pytest.org/en/latest/
-[pyupgrade]: https://github.com/asottile/pyupgrade
 [Ruff]: https://docs.astral.sh/ruff/
-[scikit-learn]:https://scikit-learn.org/
+[UV]: https://docs.astral.sh/uv/
