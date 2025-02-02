@@ -12,6 +12,7 @@ dependencies = [
     "deepchecks>=0.19.1",
     "pandas>=2.2.3",
     "numpy>=2.0.2",
+    "pyarrow>=19.0.0",
 ]
 
 [project.urls]
