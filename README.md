@@ -14,6 +14,15 @@ This demo of a data science project is created using the template from [@JoseRZa
 > [!WARNING]
 > 🚧 Work in progress 🚧, This is a demo project, It is only for educational purposes.
 
+## Install the proyect
+
+In Linux / MAC OS 
+
+1. Install [UV](https://docs.astral.sh/uv/) to manage python dependencies and environments
+2. clone repository
+3. In the root of the proyect only run: `uv sync` that commands creates en environment
+4. activate the environment `source .venv/bin/activate`
+
 ## 🗃️ Project structure
 
 ```bash
