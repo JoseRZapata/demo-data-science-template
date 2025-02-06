@@ -20,8 +20,10 @@ In Linux / MAC OS
 
 1. Install [UV](https://docs.astral.sh/uv/) to manage python dependencies and environments
 2. clone repository
-3. In the root of the proyect only run: `uv sync` that commands creates en environment
+3. In the root of the proyect only run: `uv sync` to create the environment
 4. activate the environment `source .venv/bin/activate`
+
+Enjoy!!
 
 ## 🗃️ Project structure
 
