@@ -16,7 +16,7 @@ This demo of a data science project is created using the template from [@JoseRZa
 
 ## Install the proyect
 
-In Linux / MAC OS 
+In Linux / MAC OS
 
 1. Install [UV](https://docs.astral.sh/uv/) to manage python dependencies and environments
 2. clone repository
@@ -24,6 +24,12 @@ In Linux / MAC OS
 4. activate the environment `source .venv/bin/activate`
 
 Enjoy!!
+
+## Streamlit Demo
+
+To run the streamlit demo, you can run the following command:
+
+`streamlit run notebooks/7-deploy/titanic-streamlit.py`
 
 ## 🗃️ Project structure
 
@@ -347,18 +353,4 @@ This project was generated from [@JoseRZapata]'s [data science project template]
 ---
 [@JoseRZapata]: https://github.com/JoseRZapata
 
-[bandit]: https://github.com/PyCQA/bandit
-[codecov]: https://codecov.io/
-[Cookiecutter]:https://cookiecutter.readthedocs.io/en/stable/
-[coverage.py]: https://coverage.readthedocs.io/
-[Cruft]: https://cruft.github.io/cruft/
 [data science project template]: https://github.com/JoseRZapata/data-science-project-template
-[Data structure]: demo-data-science-template/data/README.md
-[hydra]: https://hydra.cc/
-[Mypy]: http://mypy-lang.org/
-[Notebook template]: demo-data-science-template/notebooks/notebook_template.ipynb
-[pre-commit]: https://pre-commit.com/
-[Pull Request template]: demo-data-science-template/.github/pull_request_template.md
-[Pytest]: https://docs.pytest.org/en/latest/
-[Ruff]: https://docs.astral.sh/ruff/
-[UV]: https://docs.astral.sh/uv/
