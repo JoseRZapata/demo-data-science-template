@@ -15,7 +15,11 @@ from omegaconf import DictConfig
 from src.libs.data_etl.data_etl import data_type_conversion, download_csv_url
 
 
-@hydra.main(version_base=None, config_path="../../../conf", config_name="config")
+@hydra.main(
+    version_base=None,
+    config_path="../../conf/data_extraction",
+    config_name="data-extraction.yaml",
+)
 def get_data(cfg: DictConfig) -> None:
     use_columns = list(cfg.features)
     use_columns.append(str(cfg.target_column))
@@ -28,7 +32,11 @@ def get_data(cfg: DictConfig) -> None:
     )
 
 
-@hydra.main(version_base=None, config_path="../../../conf", config_name="config")
+@hydra.main(
+    version_base=None,
+    config_path="../../conf/data_extraction",
+    config_name="data-extraction.yaml",
+)
 def data_transformation(cfg: DictConfig) -> None:
     """Transform the raw data into a more suitable format for machine learning.
 
@@ -58,4 +66,4 @@ if __name__ == "__main__":
     get_data()
     # transform data in correct format
     data_transformation()
-    print("ETL pipeline completed.")
+    print("Data Extraction pipeline completed.")

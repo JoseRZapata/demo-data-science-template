@@ -3,22 +3,20 @@ import pytest
 from hydra import compose, initialize
 from pytest_mock import MockerFixture
 
-from src.pipelines.etl import basic_etl_pipeline
+from src.pipelines import data_extraction
 
 
 @pytest.fixture
 def hydra_config_path() -> str:
-    return "../../../conf"
+    return "../../conf/data_extraction"
 
 
-def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> None:
+def test_data_extraction(hydra_config_path: str, mocker: MockerFixture) -> None:
     # Import mock for the download_csv_url function
-    mock_download_csv_url = mocker.patch("src.pipelines.etl.basic_etl_pipeline.download_csv_url")
+    mock_download_csv_url = mocker.patch("src.pipelines.data_extraction.download_csv_url")
 
     # import mock for the data_type_conversion function
-    mock_data_type_conversion = mocker.patch(
-        "src.pipelines.etl.basic_etl_pipeline.data_type_conversion"
-    )
+    mock_data_type_conversion = mocker.patch("src.pipelines.data_extraction.data_type_conversion")
 
     # Mock pd.read_csv to return a dummy DataFrame
     mock_read_csv = mocker.patch("pandas.read_csv", return_value=pd.DataFrame())
@@ -28,8 +26,8 @@ def test_basic_etl_pipeline(hydra_config_path: str, mocker: MockerFixture) -> No
         cfg = compose(config_name="config")
 
     # Execute the pipeline
-    basic_etl_pipeline.get_data(cfg)
-    basic_etl_pipeline.data_transformation(cfg)
+    data_extraction.get_data(cfg)
+    data_extraction.data_transformation(cfg)
 
     # check that the function was called with the right arguments
     mock_download_csv_url.assert_called_once_with(
