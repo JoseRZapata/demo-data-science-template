@@ -33,6 +33,9 @@ To run the streamlit demo, you can run the following command:
 
 ## 🗃️ Project structure
 
+- [Data structure]
+- [Pipelines based on mlops by google](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_1_ml_pipeline_automation)
+
 ```bash
 .
 ├── codecov.yml                         # configuration for codecov
@@ -85,7 +88,6 @@ To run the streamlit demo, you can run the following command:
 │   │   ├── feat_imputation             # feature engineering imputation    
 │   │   ├── feat_new_features           # feature engineering new features
 │   │   ├── feat_pipelines              # feature engineering pipelines
-│   │   ├── feat_preprocess_strings     # feature engineering pre process strings
 │   │   ├── feat_scaling                # feature engineering scaling data
 │   │   ├── feat_selection              # feature engineering feature selection
 │   │   ├── feat_strings                # feature engineering strings
@@ -96,11 +98,13 @@ To run the streamlit demo, you can run the following command:
 │   │   ├── model_validation            # model validation
 │   │   └── reports                     # reports
 │   ├── pipelines
-│   │   ├── data_etl                    # data extraction, transformation, and loading
-│   │   ├── feature_engineering         # prepare data for modeling
-│   │   ├── model_evaluation            # evaluate model performance
-│   │   ├── model_prediction            # model predictions
-│   │   └── model_train                 # train models    
+│   │   ├── data_extraction             # data extraction loading
+│   │   ├── data_validation             # data validation
+│   │   ├── data_preparation            # prepare data for modeling (cleaning, feature engineering)
+│   │   ├── model_train                 # train models
+│   │   ├── model_eval                  # evaluate model performance using test set
+│   │   ├── model_validation            # compare model vs baseline
+│   │   └── model_serving               # deploy model to serve predictions
 ├── tests                               # test code for your project
 └── .vscode                             # vscode configuration
     ├── extensions.json                 # list of recommended extensions
@@ -354,3 +358,5 @@ This project was generated from [@JoseRZapata]'s [data science project template]
 [@JoseRZapata]: https://github.com/JoseRZapata
 
 [data science project template]: https://github.com/JoseRZapata/data-science-project-template
+
+[Data structure]: https://github.com/JoseRZapata/data-science-project-template/blob/main/demo-data-science-template/data/README.md
