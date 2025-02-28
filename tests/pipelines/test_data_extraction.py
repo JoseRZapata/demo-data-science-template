@@ -5,13 +5,14 @@ from pytest_mock import MockerFixture
 
 from src.pipelines import data_extraction
 
-
 @pytest.fixture
-def hydra_config_path() -> str:
-    return "../../conf/data_extraction"
+def cfg():
+    with initialize(config_path="../../conf/data_extraction", version_base=None):
+        cfg = compose(config_name="data-extraction.yaml")
+    return cfg
 
 
-def test_data_extraction(hydra_config_path: str, mocker: MockerFixture) -> None:
+def test_data_extraction(cfg: str, mocker: MockerFixture) -> None:
     # Import mock for the download_csv_url function
     mock_download_csv_url = mocker.patch("src.pipelines.data_extraction.download_csv_url")
 
@@ -21,11 +22,7 @@ def test_data_extraction(hydra_config_path: str, mocker: MockerFixture) -> None:
     # Mock pd.read_csv to return a dummy DataFrame
     mock_read_csv = mocker.patch("pandas.read_csv", return_value=pd.DataFrame())
 
-    # Initialize Hydra and the config
-    with initialize(config_path=hydra_config_path, version_base="1.1"):
-        cfg = compose(config_name="data_extraction")
-
-    # Execute the pipeline
+     # Execute the pipeline
     data_extraction.get_data(cfg)
     data_extraction.data_transformation(cfg)
 
