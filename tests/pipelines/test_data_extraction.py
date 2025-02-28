@@ -23,7 +23,7 @@ def test_data_extraction(hydra_config_path: str, mocker: MockerFixture) -> None:
 
     # Initialize Hydra and the config
     with initialize(config_path=hydra_config_path, version_base="1.1"):
-        cfg = compose(config_name="config")
+        cfg = compose(config_name="data_extraction")
 
     # Execute the pipeline
     data_extraction.get_data(cfg)
