@@ -12,7 +12,10 @@ import hydra
 import pandas as pd
 from omegaconf import DictConfig
 
-from src.libs.data_etl.data_etl import data_type_conversion, download_csv_url
+from src.libs.data_extraction.data_extraction import (
+    data_type_conversion,
+    download_csv_url,
+)
 
 
 @hydra.main(version_base=None, config_path="../../../conf", config_name="config")
@@ -58,4 +61,4 @@ if __name__ == "__main__":
     get_data()
     # transform data in correct format
     data_transformation()
-    print("ETL pipeline completed.")
+    print("Data extraction pipeline completed.")

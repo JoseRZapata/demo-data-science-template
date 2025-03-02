@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 from pytest_mock import MockerFixture
 
-from libs.data_etl.data_etl import data_type_conversion, download_csv_url
+from libs.data_extraction.data_extraction import data_type_conversion, download_csv_url
 
 
 @pytest.fixture
@@ -27,7 +27,10 @@ def mock_read_csv(mocker: MockerFixture) -> None:
         }
         return pd.DataFrame(data)
 
-    mocker.patch("src.libs.data_etl.data_etl.pd.read_csv", side_effect=mock_function)
+    mocker.patch(
+        "src.libs.data_extraction.data_extraction.pd.read_csv",
+        side_effect=mock_function,
+    )
 
 
 def test_download_csv_url(mocker: MockerFixture) -> None:
