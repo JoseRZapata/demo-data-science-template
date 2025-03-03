@@ -56,11 +56,11 @@ def data_transformation(cfg: DictConfig) -> None:
     )
 
 
-def main() -> None:
+def run() -> None:
     get_data()
     data_transformation()
     print("Data extraction pipeline completed.")
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":  # pragma: no cover
+    run()

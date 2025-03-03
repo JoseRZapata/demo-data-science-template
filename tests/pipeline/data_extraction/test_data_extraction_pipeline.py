@@ -4,6 +4,7 @@ from hydra import compose, initialize
 from pytest_mock import MockerFixture
 
 from src.pipelines.data_extraction import data_extraction_pipeline
+from src.pipelines.data_extraction.data_extraction_pipeline import run
 
 
 @pytest.fixture
@@ -11,9 +12,7 @@ def hydra_config_path() -> str:
     return "../../../conf/data_extraction"
 
 
-def test_data_extraction_pipeline(
-    hydra_config_path: str, mocker: MockerFixture
-) -> None:
+def test_data_extraction_pipeline(hydra_config_path: str, mocker: MockerFixture) -> None:
     # Import mock for the download_csv_url function
     mock_download_csv_url = mocker.patch(
         "src.pipelines.data_extraction.data_extraction_pipeline.download_csv_url"
@@ -44,9 +43,7 @@ def test_data_extraction_pipeline(
     )
 
     args, kwargs = mock_data_type_conversion.call_args
-    assert isinstance(
-        args[0], pd.DataFrame
-    )  # check that the first argument is a DataFrame
+    assert isinstance(args[0], pd.DataFrame)  # check that the first argument is a DataFrame
     assert kwargs == {
         "cat_columns": cfg.cols_categoric._content,
         "float_columns": cfg.cols_numeric_float._content,
@@ -93,9 +90,7 @@ def test_data_transformation(hydra_config_path: str, mocker: MockerFixture) -> N
     # Execute the data_transformation function
     data_extraction_pipeline.data_transformation(cfg)
     args, kwargs = mock_data_type_conversion.call_args
-    assert isinstance(
-        args[0], pd.DataFrame
-    )  # check that the first argument is a DataFrame
+    assert isinstance(args[0], pd.DataFrame)  # check that the first argument is a DataFrame
     assert kwargs == {
         "cat_columns": cfg.cols_categoric._content,
         "float_columns": cfg.cols_numeric_float._content,
@@ -105,9 +100,7 @@ def test_data_transformation(hydra_config_path: str, mocker: MockerFixture) -> N
     # Check that pd.read_csv was called with the correct arguments
     mock_read_csv.assert_called_once_with(cfg.data.raw)
     # Check that to_parquet was called with the correct arguments
-    mock_to_parquet.assert_called_once_with(
-        cfg.data.intermediate, engine="pyarrow", index=False
-    )
+    mock_to_parquet.assert_called_once_with(cfg.data.intermediate, engine="pyarrow", index=False)
 
 
 def test_main(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -118,6 +111,5 @@ def test_main(monkeypatch: pytest.MonkeyPatch) -> None:
         "src.pipelines.data_extraction.data_extraction_pipeline.data_transformation",
         lambda: None,
     )
-    # Simula que el script se ejecuta como `__main__`
-    monkeypatch.setattr(data_extraction_pipeline, "__name__", "__main__")
-    data_extraction_pipeline.main()
+
+    run()
