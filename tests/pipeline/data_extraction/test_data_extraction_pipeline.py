@@ -8,7 +8,7 @@ from src.pipelines.data_extraction import data_extraction_pipeline
 
 @pytest.fixture
 def hydra_config_path() -> str:
-    return "../../../conf"
+    return "../../../conf/data_extraction"
 
 
 def test_data_extraction_pipeline(
@@ -29,7 +29,7 @@ def test_data_extraction_pipeline(
 
     # Initialize Hydra and the config
     with initialize(config_path=hydra_config_path, version_base="1.1"):
-        cfg = compose(config_name="config")
+        cfg = compose(config_name="data_extraction.yaml")
 
     # Execute the pipeline
     data_extraction_pipeline.get_data(cfg)
@@ -56,3 +56,44 @@ def test_data_extraction_pipeline(
 
     # Check that pd.read_csv was called with the correct arguments
     mock_read_csv.assert_called_once_with(cfg.data.raw)
+
+    def test_get_data(hydra_config_path: str, mocker: MockerFixture) -> None:
+        # Import mock for the download_csv_url function
+        mock_download_csv_url = mocker.patch(
+            "src.pipelines.data_extraction.data_extraction_pipeline.download_csv_url"
+        )
+
+        # Initialize Hydra and the config
+        with initialize(config_path=hydra_config_path, version_base="1.1"):
+            cfg = compose(config_name="data_extraction.yaml")
+
+        # Execute the get_data function
+        data_extraction_pipeline.get_data(cfg)
+
+        # check that the function was called with the right arguments
+        mock_download_csv_url.assert_called_once_with(
+            url=cfg.etl.url,
+            use_columns=[str(column) for column in cfg.features]
+            + [str(cfg.target_column)],
+            raw_path=cfg.data.raw,
+            na_value=cfg.etl.na_value,
+        )
+
+
+def test_get_data(hydra_config_path: str, mocker: MockerFixture) -> None:
+    # Import mock for the download_csv_url function
+    mock_download_csv_url = mocker.patch(
+        "src.pipelines.data_extraction.data_extraction_pipeline.download_csv_url"
+    )
+    # Initialize Hydra and the config
+    with initialize(config_path=hydra_config_path, version_base="1.1"):
+        cfg = compose(config_name="data_extraction.yaml")
+    # Execute the get_data function
+    data_extraction_pipeline.get_data(cfg)
+    # check that the function was called with the right arguments
+    mock_download_csv_url.assert_called_once_with(
+        url=cfg.etl.url,
+        use_columns=[str(column) for column in cfg.features] + [str(cfg.target_column)],
+        raw_path=cfg.data.raw,
+        na_value=cfg.etl.na_value,
+    )
