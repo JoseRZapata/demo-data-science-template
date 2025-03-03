@@ -56,9 +56,11 @@ def data_transformation(cfg: DictConfig) -> None:
     )
 
 
-if __name__ == "__main__":
-    # download raw data
+def main() -> None:
     get_data()
-    # transform data in correct format
     data_transformation()
     print("Data extraction pipeline completed.")
+
+
+if __name__ == "__main__":
+    main()

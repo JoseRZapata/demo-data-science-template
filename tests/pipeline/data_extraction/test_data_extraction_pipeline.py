@@ -4,6 +4,7 @@ from hydra import compose, initialize
 from pytest_mock import MockerFixture
 
 from src.pipelines.data_extraction import data_extraction_pipeline
+from src.pipelines.data_extraction.data_extraction_pipeline import main
 
 
 @pytest.fixture
@@ -100,3 +101,15 @@ def test_data_transformation(hydra_config_path: str, mocker: MockerFixture) -> N
     mock_read_csv.assert_called_once_with(cfg.data.raw)
     # Check that to_parquet was called with the correct arguments
     mock_to_parquet.assert_called_once_with(cfg.data.intermediate, engine="pyarrow", index=False)
+
+
+def test_main(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        "src.pipelines.data_extraction.data_extraction_pipeline.get_data", lambda: None
+    )
+    monkeypatch.setattr(
+        "src.pipelines.data_extraction.data_extraction_pipeline.data_transformation",
+        lambda: None,
+    )
+
+    main()
