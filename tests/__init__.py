@@ -1,5 +1,1 @@
-# Avoid ModuleNotFoundError
-
-import sys
-
-sys.path.append("./src")
+# Este archivo vacío convierte la carpeta tests en un paquete Python
