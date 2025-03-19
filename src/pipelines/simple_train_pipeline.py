@@ -120,7 +120,7 @@ data_model_pipeline = Pipeline(
     steps=[("preprocessor", preprocessor), ("model", RandomForestClassifier())]
 )
 
-# Hyperparameter tunning
+# Hyperparameter tuning
 score = "recall"
 
 hyperparameters = {
