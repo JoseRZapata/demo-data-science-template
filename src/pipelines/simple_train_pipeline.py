@@ -58,9 +58,7 @@ cols_categoric_ord = ["pclass"]
 # Categorical variables
 dataset[cols_categoric] = dataset[cols_categoric].astype("category")
 
-dataset["pclass"] = pd.Categorical(
-    dataset["pclass"], categories=[3, 2, 1], ordered=True
-)
+dataset["pclass"] = pd.Categorical(dataset["pclass"], categories=[3, 2, 1], ordered=True)
 
 # Numerical variables
 
@@ -155,9 +153,7 @@ model_validation = metric_result > BASELINE_SCORE
 if model_validation:
     print("Model validation passed")
 else:
-    print(
-        f"Model validation failed: score {metric_result} below baseline {BASELINE_SCORE}"
-    )
+    print(f"Model validation failed: score {metric_result} below baseline {BASELINE_SCORE}")
     raise ValueError()
 
 # Save model
