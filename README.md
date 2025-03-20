@@ -31,6 +31,14 @@ To run the streamlit demo, you can run the following command:
 
 `streamlit run notebooks/7-deploy/titanic-streamlit.py`
 
+## Run Training pipeline
+
+To run the simple training, you can run the following command in the environment:
+
+`python src/pipelines/simple_train_pipeline.py`
+
+Created Trained model will be in: `models/first_basic_model.joblib`
+
 ## 🗃️ Project structure
 
 - [Data structure]

@@ -65,4 +65,5 @@ source = ["src/"]
 
 [tool.coverage.run]
 source = ["src"]
-omit = ["**/__init__.py"]
+omit = ["**/__init__.py",
+        "src/pipelines/simple_train_pipeline.py"]
