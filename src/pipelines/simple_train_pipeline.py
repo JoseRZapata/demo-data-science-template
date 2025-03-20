@@ -155,8 +155,10 @@ model_validation = metric_result > BASELINE_SCORE
 if model_validation:
     print("Model validation passed")
 else:
-    print("Model validation failed")
-    raise ValueError("Model validation failed")
+    print(
+        f"Model validation failed: score {metric_result} below baseline {BASELINE_SCORE}"
+    )
+    raise ValueError()
 
 # Save model
 
