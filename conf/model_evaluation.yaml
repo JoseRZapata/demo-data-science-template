@@ -1,0 +1,2 @@
+metric:
+  _target_: sklearn.metrics.recall_score

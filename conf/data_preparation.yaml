@@ -1,0 +1,63 @@
+# Hydra config file for data preparation
+_target_: hydra_sklearn_pipeline.make_pipeline
+
+data_split:
+  test_size: 0.2
+  random_state: 42
+  stratify: survived
+
+# name: <name of the pipeline>
+# StepName:
+#     _target_: <class to initiating the step>
+#     param1: <step's first parameter>
+#     param2: <step's second parameter, etc.>
+# columns: <columns to apply the step to>
+
+# Example:
+# pipelines:
+#  - name: numeric_int
+#    steps_config:
+#      - SimpleImputer:
+#          _target_: sklearn.impute.SimpleImputer
+#          strategy: 'median'
+#    columns:
+#      - sibsp
+#      - parch
+
+pipelines:
+  - name: numeric_int
+    steps_config:
+      - SimpleImputer:
+          _target_: sklearn.impute.SimpleImputer
+          strategy: 'median'
+    columns:
+      - sibsp
+      - parch
+  - name: numeric_float
+    steps_config:
+      - SimpleImputer:
+          _target_: sklearn.impute.SimpleImputer
+          strategy: 'mean'
+    columns:
+      - age
+      - fare
+  - name: categorical_nominal
+    steps_config:
+      - SimpleImputer:
+          _target_: sklearn.impute.SimpleImputer
+          strategy: 'most_frequent'
+      - OneHotEncoder:
+          _target_: sklearn.preprocessing.OneHotEncoder
+          handle_unknown: ignore    
+    columns:
+      - sex
+      - embarked
+  - name: categorical_ordinal
+    steps_config:
+      - SimpleImputer:
+          _target_: sklearn.impute.SimpleImputer
+          strategy: 'most_frequent'
+      - OrdinalEncoder:
+          _target_: sklearn.preprocessing.OrdinalEncoder
+    columns:
+      - pclass
