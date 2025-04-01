@@ -12,7 +12,7 @@ import hydra
 import pandas as pd
 from omegaconf import DictConfig
 
-from src.libs.data_extraction.data_extraction import (
+from src.data.data_extraction.data_extraction.data_extraction import (
     data_type_conversion,
     download_csv_url,
 )
