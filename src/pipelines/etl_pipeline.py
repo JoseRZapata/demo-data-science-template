@@ -1,16 +1,33 @@
 """ELT Pipeline - Executes Data pipes"""
 
-from app.logic.data.preparator.pipe import data_preparation
-from app.logic.data.validator.pipe import data_validation
-from app.pipelines.constants import (
-    DATA_EXTRACTOR_CONFIG_PATH,
-    DATA_PREPARATION_CONF_PATH,
-    DATA_VALIDATION_CONFIG_PATH,
-)
+from pathlib import Path
 
-from pipelines.data_extraction.pipeline import data_extraction
+import pyarrow as pa
+
+from src.pipelines.data_extraction.pipeline import data_extraction
+from src.pipelines.data_preparation.preprocess_pipeline import data_preprocess
+from src.pipelines.data_validation.pipeline import data_validation
 
 if __name__ == "__main__":
-    dataset = data_extraction(DATA_EXTRACTOR_CONFIG_PATH)  # pragma: no cover
-    data_validation(dataset, DATA_VALIDATION_CONFIG_PATH)  # pragma: no cover
-    data_preparation(dataset, DATA_PREPARATION_CONF_PATH)  # pragma: no cover
+    # data directory path
+    DATA_DIR = Path.cwd().resolve() / "data"
+
+    # data extraction
+    dataset = data_extraction("conf/data_extraction.yaml")  # pragma: no cover
+
+    # data validation
+    data_validation(dataset, "conf/data_validation.yaml")  # pragma: no cover
+
+    # data pre-processing
+    dataset_preprocess = data_preprocess(
+        dataset, "conf/data_preparation.yaml"
+    )  # pragma: no cover
+
+    # save preprocessed dataset
+    schema = pa.Table.from_pandas(dataset_preprocess).schema
+    dataset_preprocess.to_parquet(
+        DATA_DIR / "02_intermediate/dataset_type_fixed.parquet",
+        index=False,
+        schema=schema,
+    )
+    print("Data pre-processing completed successfully.")
