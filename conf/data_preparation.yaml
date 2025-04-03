@@ -1,10 +1,20 @@
 # Hydra config file for data preparation
-_target_: hydra_sklearn_pipeline.make_pipeline
+data_types:
+  pclass: 'category'
+  sex: 'category'
+  age: 'float32'
+  sibsp: 'Int8'
+  parch: 'Int8'
+  fare: 'float32'
+  embarked: 'category'
+  survived: 'Int8'
 
 data_split:
   test_size: 0.2
   random_state: 42
   stratify: survived
+
+_target_: hydra_sklearn_pipeline.make_pipeline
 
 # name: <name of the pipeline>
 # StepName:
@@ -48,7 +58,7 @@ pipelines:
           strategy: 'most_frequent'
       - OneHotEncoder:
           _target_: sklearn.preprocessing.OneHotEncoder
-          handle_unknown: ignore    
+          handle_unknown: ignore
     columns:
       - sex
       - embarked
