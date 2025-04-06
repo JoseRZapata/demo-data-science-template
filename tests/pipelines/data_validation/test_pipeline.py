@@ -3,33 +3,34 @@
 import os
 import sys
 import tempfile
-from unittest.mock import patch
+from typing import Generator
+from unittest.mock import MagicMock, patch
 
 import pandas as pd
 import pytest
 from omegaconf import OmegaConf
 
 # Add the project root to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
+sys.path.insert(
+    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+)
 
 from src.pipelines.data_validation.pipeline import data_validation
 
 
 @pytest.fixture
-def sample_dataframe():
+def sample_dataframe() -> pd.DataFrame:
     """Create a sample dataframe for testing."""
-    return pd.DataFrame(
-        {
-            "feature1": [1, 2, 3],
-            "feature2": ["a", "b", "c"],
-            "feature3": [True, False, True],
-            "target": [0, 1, 0],
-        }
-    )
+    return pd.DataFrame({
+        "feature1": [1, 2, 3],
+        "feature2": ["a", "b", "c"],
+        "feature3": [True, False, True],
+        "target": [0, 1, 0],
+    })
 
 
 @pytest.fixture
-def sample_validation_config_file():
+def sample_validation_config_file() -> Generator[str, None, None]:
     """Create a sample validation config file for testing."""
     # Create a temp file with our test config
     temp_dir = tempfile.mkdtemp()
@@ -67,20 +68,21 @@ def sample_validation_config_file():
 @patch("src.pipelines.data_validation.pipeline.validate_data")
 @patch("src.pipelines.data_validation.pipeline.OmegaConf.load")
 def test_data_validation_success(
-    mock_load, mock_validate_data, sample_dataframe, sample_validation_config_file
-):
+    mock_load: MagicMock,
+    mock_validate_data: MagicMock,
+    sample_dataframe: pd.DataFrame,
+    sample_validation_config_file: str,
+) -> None:
     """Test that data_validation correctly processes valid data."""
     # Mock OmegaConf load to return our config
-    mock_config = OmegaConf.create(
-        {
-            "columns": {
-                "feature1": {"dtype": "Int64", "nullable": False},
-                "feature2": {"dtype": "String", "nullable": False},
-                "feature3": {"dtype": "Bool", "nullable": False},
-                "target": {"dtype": "Int64", "nullable": False},
-            }
+    mock_config = OmegaConf.create({
+        "columns": {
+            "feature1": {"dtype": "Int64", "nullable": False},
+            "feature2": {"dtype": "String", "nullable": False},
+            "feature3": {"dtype": "Bool", "nullable": False},
+            "target": {"dtype": "Int64", "nullable": False},
         }
-    )
+    })
     mock_load.return_value = mock_config
 
     # Mock the validate_data function to return our dataframe
@@ -101,20 +103,21 @@ def test_data_validation_success(
 @patch("src.pipelines.data_validation.pipeline.validate_data")
 @patch("src.pipelines.data_validation.pipeline.OmegaConf.load")
 def test_data_validation_error(
-    mock_load, mock_validate_data, sample_dataframe, sample_validation_config_file
-):
+    mock_load: MagicMock,
+    mock_validate_data: MagicMock,
+    sample_dataframe: pd.DataFrame,
+    sample_validation_config_file: str,
+) -> None:
     """Test that data_validation correctly raises errors."""
     # Mock OmegaConf load to return our config
-    mock_config = OmegaConf.create(
-        {
-            "columns": {
-                "feature1": {"dtype": "Int64", "nullable": False},
-                "feature2": {"dtype": "String", "nullable": False},
-                "feature3": {"dtype": "Bool", "nullable": False},
-                "target": {"dtype": "Int64", "nullable": False},
-            }
+    mock_config = OmegaConf.create({
+        "columns": {
+            "feature1": {"dtype": "Int64", "nullable": False},
+            "feature2": {"dtype": "String", "nullable": False},
+            "feature3": {"dtype": "Bool", "nullable": False},
+            "target": {"dtype": "Int64", "nullable": False},
         }
-    )
+    })
     mock_load.return_value = mock_config
 
     # Mock the validate_data function to raise an error
