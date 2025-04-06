@@ -7,10 +7,12 @@ from unittest.mock import MagicMock, patch
 import pandas as pd
 import pandera as pa
 import pytest
-from omegaconf import OmegaConf
+from omegaconf import DictConfig, OmegaConf
 
 # Add the project root to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
+sys.path.insert(
+    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+)
 
 from src.data.data_validation.data_validation import (
     create_pandera_schema,
@@ -19,7 +21,7 @@ from src.data.data_validation.data_validation import (
 
 
 @pytest.fixture
-def sample_validation_config():
+def sample_validation_config() -> DictConfig:
     """Create a sample validation configuration."""
     config_yaml = """
     columns:
@@ -47,42 +49,36 @@ def sample_validation_config():
 
 
 @pytest.fixture
-def valid_dataframe():
+def valid_dataframe() -> pd.DataFrame:
     """Create a dataframe that should pass validation."""
-    return pd.DataFrame(
-        {
-            "age": [25.0, 40.0, 60.0],
-            "name": ["John", "Jane", "Bob"],
-            "category": ["A", "B", "C"],
-        }
-    )
+    return pd.DataFrame({
+        "age": [25.0, 40.0, 60.0],
+        "name": ["John", "Jane", "Bob"],
+        "category": ["A", "B", "C"],
+    })
 
 
 @pytest.fixture
-def invalid_dataframe():
+def invalid_dataframe() -> pd.DataFrame:
     """Create a dataframe that should fail validation."""
-    return pd.DataFrame(
-        {
-            "age": [25.0, -5.0, 200.0],  # Invalid: negative value and > 120
-            "name": ["John", None, "Bob"],  # Valid because nullable is true
-            "category": ["A", "D", "C"],  # Invalid: 'D' not in allowed values
-        }
-    )
+    return pd.DataFrame({
+        "age": [25.0, -5.0, 200.0],  # Invalid: negative value and > 120
+        "name": ["John", None, "Bob"],  # Valid because nullable is true
+        "category": ["A", "D", "C"],  # Invalid: 'D' not in allowed values
+    })
 
 
 @pytest.fixture
-def sample_dataframe():
+def sample_dataframe() -> pd.DataFrame:
     """Create a sample dataframe."""
-    return pd.DataFrame(
-        {
-            "age": [25.0, 40.0, 60.0],
-            "name": ["John", "Jane", "Bob"],
-            "category": ["A", "B", "C"],
-        }
-    )
+    return pd.DataFrame({
+        "age": [25.0, 40.0, 60.0],
+        "name": ["John", "Jane", "Bob"],
+        "category": ["A", "B", "C"],
+    })
 
 
-def test_create_pandera_schema(sample_validation_config):
+def test_create_pandera_schema(sample_validation_config: DictConfig) -> None:
     """Test that a pandera schema is correctly created from configuration."""
     schema = create_pandera_schema(sample_validation_config)
 
@@ -110,16 +106,18 @@ def test_create_pandera_schema(sample_validation_config):
 
 
 @patch("src.data.data_validation.data_validation.create_pandera_schema")
-def test_validate_data_valid(mock_create_schema, sample_validation_config, valid_dataframe):
+def test_validate_data_valid(
+    mock_create_schema: MagicMock,
+    sample_validation_config: DictConfig,
+    valid_dataframe: pd.DataFrame,
+) -> None:
     """Test that validation succeeds with valid data."""
     # Create a schema that will validate successfully
-    schema = pa.DataFrameSchema(
-        {
-            "age": pa.Column(pa.dtypes.Float64, nullable=False),
-            "name": pa.Column(pa.dtypes.String, nullable=True),
-            "category": pa.Column(pa.dtypes.String, nullable=False),
-        }
-    )
+    schema = pa.DataFrameSchema({
+        "age": pa.Column(pa.dtypes.Float64, nullable=False),
+        "name": pa.Column(pa.dtypes.String, nullable=True),
+        "category": pa.Column(pa.dtypes.String, nullable=False),
+    })
 
     # Mock schema to avoid actually creating it
     mock_create_schema.return_value = schema
@@ -135,22 +133,24 @@ def test_validate_data_valid(mock_create_schema, sample_validation_config, valid
 
 
 @patch("src.data.data_validation.data_validation.create_pandera_schema")
-def test_validate_data_invalid(mock_create_schema, sample_validation_config, invalid_dataframe):
+def test_validate_data_invalid(
+    mock_create_schema: MagicMock,
+    sample_validation_config: DictConfig,
+    invalid_dataframe: pd.DataFrame,
+) -> None:
     """Test that validation fails with invalid data."""
     # Create a schema that will fail validation
-    schema = pa.DataFrameSchema(
-        {
-            "age": pa.Column(
-                pa.dtypes.Float64,
-                nullable=False,
-                checks=[pa.Check.in_range(min_value=0, max_value=120)],
-            ),
-            "name": pa.Column(pa.dtypes.String, nullable=True),
-            "category": pa.Column(
-                pa.dtypes.String, nullable=False, checks=[pa.Check.isin(["A", "B", "C"])]
-            ),
-        }
-    )
+    schema = pa.DataFrameSchema({
+        "age": pa.Column(
+            pa.dtypes.Float64,
+            nullable=False,
+            checks=[pa.Check.in_range(min_value=0, max_value=120)],
+        ),
+        "name": pa.Column(pa.dtypes.String, nullable=True),
+        "category": pa.Column(
+            pa.dtypes.String, nullable=False, checks=[pa.Check.isin(["A", "B", "C"])]
+        ),
+    })
 
     # Mock schema
     mock_create_schema.return_value = schema
@@ -160,7 +160,9 @@ def test_validate_data_invalid(mock_create_schema, sample_validation_config, inv
         validate_data(invalid_dataframe, sample_validation_config)
 
 
-def test_validate_unexpected_error(sample_dataframe, sample_validation_config):
+def test_validate_unexpected_error(
+    sample_dataframe: pd.DataFrame, sample_validation_config: DictConfig
+) -> None:
     """Test handling of unexpected errors during validation."""
     # Create a mock schema for the validate call
     schema_mock = MagicMock()
