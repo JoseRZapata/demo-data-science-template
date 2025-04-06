@@ -1,9 +1,9 @@
 """Test module for the data preparation preprocessing pipeline."""
-# noqa: B101  # Disable Bandit assert warning for pytest test files
+# Disable Bandit assert warning for pytest test files
 
 import os
 import tempfile
-from typing import Generator
+from collections.abc import Generator
 
 import pandas as pd
 import pytest
@@ -23,12 +23,14 @@ def sample_data() -> pd.DataFrame:
     Returns:
         pd.DataFrame: Sample data for testing
     """
-    return pd.DataFrame({
-        "pclass": [1, 2, 3, 1, 1],  # duplicated row at the end
-        "age": [22.0, 38.0, 26.0, 35.0, 35.0],
-        "sibsp": [1, 1, 0, 1, 1],
-        "embarked": ["S", "C", "S", "S", "S"],
-    })
+    return pd.DataFrame(
+        {
+            "pclass": [1, 2, 3, 1, 1],  # duplicated row at the end
+            "age": [22.0, 38.0, 26.0, 35.0, 35.0],
+            "sibsp": [1, 1, 0, 1, 1],
+            "embarked": ["S", "C", "S", "S", "S"],
+        }
+    )
 
 
 @pytest.fixture
@@ -113,9 +115,7 @@ def test_data_type_conversion(sample_data: pd.DataFrame) -> None:
     data_types_with_nonexistent = data_types_dict.copy()
     data_types_with_nonexistent["nonexistent_column"] = "float64"
 
-    result_with_nonexistent = data_type_conversion(
-        sample_data, data_types_with_nonexistent
-    )
+    result_with_nonexistent = data_type_conversion(sample_data, data_types_with_nonexistent)
 
     # Should not throw an error and should convert the existing columns
     assert result_with_nonexistent["pclass"].dtype.name == "category"

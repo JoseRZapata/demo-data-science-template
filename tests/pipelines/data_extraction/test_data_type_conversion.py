@@ -7,9 +7,7 @@ import numpy as np
 import pandas as pd
 
 # Add the project root to the Python path
-sys.path.insert(
-    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
-)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
 
 from src.pipelines.data_extraction.data_extraction_pipeline import data_type_conversion
 
@@ -17,12 +15,14 @@ from src.pipelines.data_extraction.data_extraction_pipeline import data_type_con
 def test_data_type_conversion_all_columns():
     """Test data type conversion for all column types."""
     # Create a test DataFrame with different data types
-    df = pd.DataFrame({
-        "cat_col": ["A", "B", "C", None],
-        "float_col": ["1.1", "2.2", "not_float", None],
-        "int_col": ["1", "2", "not_int", None],
-        "bool_col": [True, False, None, None],
-    })
+    df = pd.DataFrame(
+        {
+            "cat_col": ["A", "B", "C", None],
+            "float_col": ["1.1", "2.2", "not_float", None],
+            "int_col": ["1", "2", "not_int", None],
+            "bool_col": [True, False, None, None],
+        }
+    )
 
     # Define column types
     cat_columns = ["cat_col"]
@@ -47,9 +47,7 @@ def test_data_type_conversion_all_columns():
 
     # Verify that conversion errors are handled correctly
     assert np.isnan(result["float_col"][2])  # "not_float" should be converted to NaN
-    assert pd.isna(
-        result["int_col"][2]
-    )  # "not_int" should be converted to NA for Int64
+    assert pd.isna(result["int_col"][2])  # "not_int" should be converted to NA for Int64
 
 
 def test_data_type_conversion_with_missing_columns():

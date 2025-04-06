@@ -3,7 +3,7 @@
 Author: Jose R. Zapata <https://joserzapata.github.io/>
 """
 
-from typing import Any, Dict, List
+from typing import Any
 
 import pandas as pd
 import pandera as pa
@@ -21,7 +21,7 @@ def create_pandera_schema(validation_rules: DictConfig) -> pa.DataFrameSchema:
     Returns:
         pa.DataFrameSchema: Schema for data validation.
     """
-    columns: Dict[str, Any] = {}
+    columns: dict[str, Any] = {}
 
     for column_name, rules in validation_rules.columns.items():
         # Extract validation rules
@@ -29,7 +29,7 @@ def create_pandera_schema(validation_rules: DictConfig) -> pa.DataFrameSchema:
         nullable = rules.get("nullable", False)
 
         # Get checks if they exist
-        checks: List[Any] = []
+        checks: list[Any] = []
         if "checks" in rules:
             for check in rules.checks:
                 check_name = next(iter(check))
@@ -37,9 +37,7 @@ def create_pandera_schema(validation_rules: DictConfig) -> pa.DataFrameSchema:
 
                 check_fn = getattr(pa.Check, check_name)
                 if check_name == "in_range":
-                    checks.append(
-                        check_fn(min_value=check_params.min, max_value=check_params.max)
-                    )
+                    checks.append(check_fn(min_value=check_params.min, max_value=check_params.max))
                 elif check_name == "isin":
                     checks.append(check_fn(check_params.allowed_values))
                 elif check_name == "not_null":

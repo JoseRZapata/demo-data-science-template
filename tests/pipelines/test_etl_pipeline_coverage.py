@@ -14,12 +14,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 @pytest.fixture
 def sample_dataframe():
     """Create a sample dataframe for testing."""
-    return pd.DataFrame({
-        "feature1": [1, 2, 3],
-        "feature2": ["a", "b", "c"],
-        "feature3": [True, False, True],
-        "target": [0, 1, 0],
-    })
+    return pd.DataFrame(
+        {
+            "feature1": [1, 2, 3],
+            "feature2": ["a", "b", "c"],
+            "feature3": [True, False, True],
+            "target": [0, 1, 0],
+        }
+    )
 
 
 @pytest.fixture
@@ -55,16 +57,18 @@ def test_data_extraction_function():
 def test_data_validation_function():
     """Test the data_validation function in ETL pipeline."""
     # Create a sample DataFrame that matches the expected schema
-    sample_df = pd.DataFrame({
-        "pclass": [1, 2, 3],
-        "survived": [0, 1, 0],
-        "sex": ["male", "female", "male"],
-        "age": [25.0, 30.0, 35.0],
-        "sibsp": [1, 0, 2],
-        "parch": [0, 0, 1],
-        "fare": [10.5, 20.5, 30.5],
-        "embarked": ["C", "S", "Q"],
-    })
+    sample_df = pd.DataFrame(
+        {
+            "pclass": [1, 2, 3],
+            "survived": [0, 1, 0],
+            "sex": ["male", "female", "male"],
+            "age": [25.0, 30.0, 35.0],
+            "sibsp": [1, 0, 2],
+            "parch": [0, 0, 1],
+            "fare": [10.5, 20.5, 30.5],
+            "embarked": ["C", "S", "Q"],
+        }
+    )
 
     # Use a more direct patching approach to avoid validation errors
     with patch("src.pipelines.etl_pipeline.data_validation") as mock_validation:
@@ -85,16 +89,18 @@ def test_data_validation_function():
 def test_data_preprocess_function():
     """Test the data_preprocess function in ETL pipeline."""
     # Create a sample DataFrame
-    sample_df = pd.DataFrame({
-        "pclass": [1, 2, 3],
-        "survived": [0, 1, 0],
-        "sex": ["male", "female", "male"],
-        "age": [25.0, 30.0, 35.0],
-        "sibsp": [1, 0, 2],
-        "parch": [0, 0, 1],
-        "fare": [10.5, 20.5, 30.5],
-        "embarked": ["C", "S", "Q"],
-    })
+    sample_df = pd.DataFrame(
+        {
+            "pclass": [1, 2, 3],
+            "survived": [0, 1, 0],
+            "sex": ["male", "female", "male"],
+            "age": [25.0, 30.0, 35.0],
+            "sibsp": [1, 0, 2],
+            "parch": [0, 0, 1],
+            "fare": [10.5, 20.5, 30.5],
+            "embarked": ["C", "S", "Q"],
+        }
+    )
 
     # Use direct patching on the ETL pipeline module's function
     with patch("src.pipelines.etl_pipeline.data_preprocess") as mock_preprocess:
@@ -121,9 +127,7 @@ def test_etl_pipeline_complete_flow():
 
     # Set up our mocks for the main functions
     with (
-        patch(
-            "src.pipelines.etl_pipeline.data_extraction", return_value=raw_df
-        ) as mock_extract,
+        patch("src.pipelines.etl_pipeline.data_extraction", return_value=raw_df) as mock_extract,
         patch(
             "src.pipelines.etl_pipeline.data_validation", return_value=validated_df
         ) as mock_validate,
@@ -174,9 +178,5 @@ def test_etl_pipeline_complete_flow():
         mock_validate.assert_called_once_with(raw_df, "conf/data_validation.yaml")
         mock_preprocess.assert_called_once_with(raw_df, "conf/data_preparation.yaml")
         mock_pa.Table.from_pandas.assert_called_once_with(processed_df)
-        mock_to_parquet.assert_called_once_with(
-            "mock/path", index=False, schema=mock_schema
-        )
-        mock_to_parquet.assert_called_once_with(
-            "mock/path", index=False, schema=mock_schema
-        )
+        mock_to_parquet.assert_called_once_with("mock/path", index=False, schema=mock_schema)
+        mock_to_parquet.assert_called_once_with("mock/path", index=False, schema=mock_schema)

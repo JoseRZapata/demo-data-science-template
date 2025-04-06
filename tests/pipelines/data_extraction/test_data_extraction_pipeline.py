@@ -11,9 +11,7 @@ def hydra_config_path() -> str:
     return "../../../conf"
 
 
-def test_data_extraction_pipeline(
-    hydra_config_path: str, mocker: MockerFixture
-) -> None:
+def test_data_extraction_pipeline(hydra_config_path: str, mocker: MockerFixture) -> None:
     # Import mock for the download_csv_url function
     mock_download_csv_url = mocker.patch(
         "src.pipelines.data_extraction.data_extraction_pipeline.download_csv_url"
@@ -45,9 +43,7 @@ def test_data_extraction_pipeline(
     )
 
     args, _ = mock_data_type_conversion.call_args
-    assert isinstance(
-        args[0], pd.DataFrame
-    )  # check that the first argument is a DataFrame
+    assert isinstance(args[0], pd.DataFrame)  # check that the first argument is a DataFrame
     # We're not checking the specific column lists since we're now inferring them
 
     # Check that pd.read_csv was called with the correct arguments
@@ -90,23 +86,17 @@ def test_data_transformation(hydra_config_path: str, mocker: MockerFixture) -> N
     # Execute the data_transformation function
     data_extraction_pipeline.data_transformation(cfg)
     args, _ = mock_data_type_conversion.call_args
-    assert isinstance(
-        args[0], pd.DataFrame
-    )  # check that the first argument is a DataFrame
+    assert isinstance(args[0], pd.DataFrame)  # check that the first argument is a DataFrame
     # We're not checking the specific column lists since we're now inferring them
     # Check that pd.read_csv was called with the correct arguments
     mock_read_csv.assert_called_once_with(cfg.data.raw)
     # Check that to_parquet was called with the correct arguments
-    mock_to_parquet.assert_called_once_with(
-        cfg.data.intermediate, engine="pyarrow", index=False
-    )
+    mock_to_parquet.assert_called_once_with(cfg.data.intermediate, engine="pyarrow", index=False)
 
 
 def test_main(mocker: MockerFixture) -> None:
     # Create a mock for the run function
-    mock_run = mocker.patch(
-        "src.pipelines.data_extraction.data_extraction_pipeline.run"
-    )
+    mock_run = mocker.patch("src.pipelines.data_extraction.data_extraction_pipeline.run")
 
     # Import run after mocking it
     from src.pipelines.data_extraction.data_extraction_pipeline import run

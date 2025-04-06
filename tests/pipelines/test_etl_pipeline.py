@@ -17,12 +17,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 @pytest.fixture
 def sample_dataframe():
     """Create a sample dataframe for testing."""
-    return pd.DataFrame({
-        "feature1": [1, 2, 3],
-        "feature2": ["a", "b", "c"],
-        "feature3": [True, False, True],
-        "target": [0, 1, 0],
-    })
+    return pd.DataFrame(
+        {
+            "feature1": [1, 2, 3],
+            "feature2": ["a", "b", "c"],
+            "feature3": [True, False, True],
+            "target": [0, 1, 0],
+        }
+    )
 
 
 @pytest.fixture
@@ -111,9 +113,7 @@ def test_etl_pipeline_if_main(sample_dataframe, mock_table):
             mock_data_validation(data, "conf/data_validation.yaml")
             processed_data = mock_data_preprocess(data, "conf/data_preparation.yaml")
             mock_pa.Table.from_pandas(processed_data)
-            sample_dataframe.to_parquet(
-                mock_path, index=False, schema=mock_table.schema
-            )
+            sample_dataframe.to_parquet(mock_path, index=False, schema=mock_table.schema)
             print("Data pre-processing completed successfully.")
 
             # Verify our mocks were called

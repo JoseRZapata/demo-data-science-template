@@ -19,9 +19,7 @@ if __name__ == "__main__":
     data_validation(dataset, "conf/data_validation.yaml")  # pragma: no cover
 
     # data pre-processing
-    dataset_preprocess = data_preprocess(
-        dataset, "conf/data_preparation.yaml"
-    )  # pragma: no cover
+    dataset_preprocess = data_preprocess(dataset, "conf/data_preparation.yaml")  # pragma: no cover
 
     # save preprocessed dataset
     schema = pa.Table.from_pandas(dataset_preprocess).schema

@@ -9,9 +9,7 @@ import pandas as pd
 import pytest
 
 # Add the project root to the Python path
-sys.path.insert(
-    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
-)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
 
 from src.pipelines.data_extraction.pipeline import data_extraction
 
@@ -52,12 +50,14 @@ def sample_config_file():
 def test_data_extraction_success(mock_download_csv_url, sample_config_file):
     """Test that data_extraction correctly extracts data when successful."""
     # Create a mock dataframe to return
-    mock_df = pd.DataFrame({
-        "feature1": [1, 2, 3],
-        "feature2": ["a", "b", "c"],
-        "feature3": [True, False, True],
-        "target": [0, 1, 0],
-    })
+    mock_df = pd.DataFrame(
+        {
+            "feature1": [1, 2, 3],
+            "feature2": ["a", "b", "c"],
+            "feature3": [True, False, True],
+            "target": [0, 1, 0],
+        }
+    )
 
     # Set up the mock to return our dataframe
     mock_download_csv_url.return_value = mock_df
@@ -73,12 +73,14 @@ def test_data_extraction_success(mock_download_csv_url, sample_config_file):
     mock_download_csv_url.assert_called_once()
     args, kwargs = mock_download_csv_url.call_args
     assert args[0] == "https://example.com/dataset.csv"
-    assert sorted(kwargs["use_columns"]) == sorted([
-        "feature1",
-        "feature2",
-        "feature3",
-        "target",
-    ])
+    assert sorted(kwargs["use_columns"]) == sorted(
+        [
+            "feature1",
+            "feature2",
+            "feature3",
+            "target",
+        ]
+    )
     assert kwargs["na_value"] == "?"
 
 
