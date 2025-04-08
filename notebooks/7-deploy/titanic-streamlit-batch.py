@@ -104,23 +104,22 @@ def preprocess_batch_data(df: pd.DataFrame) -> pd.DataFrame:
         )
 
     # Convert pclass values if needed
-    if "pclass" in processed_df.columns:
-        if processed_df["pclass"].dtype == "object":
-            pclass_mapping = {
-                "1st": 1,
-                "2nd": 2,
-                "3rd": 3,
-                "first": 1,
-                "second": 2,
-                "third": 3,
-                "1": 1,
-                "2": 2,
-                "3": 3,
-            }
-            processed_df["pclass"] = processed_df["pclass"].map(
-                lambda x: pclass_mapping.get(str(x).lower(), x)
-            )
-            processed_df["pclass"] = pd.to_numeric(processed_df["pclass"], errors="coerce")
+    if "pclass" in processed_df.columns and processed_df["pclass"].dtype == "object":
+        pclass_mapping = {
+            "1st": 1,
+            "2nd": 2,
+            "3rd": 3,
+            "first": 1,
+            "second": 2,
+            "third": 3,
+            "1": 1,
+            "2": 2,
+            "3": 3,
+        }
+        processed_df["pclass"] = processed_df["pclass"].map(
+            lambda x: pclass_mapping.get(str(x).lower(), x)
+        )
+        processed_df["pclass"] = pd.to_numeric(processed_df["pclass"], errors="coerce")
 
     # Convert embarked values if needed
     if "embarked" in processed_df.columns:
@@ -219,7 +218,7 @@ def batch_prediction_tab(model: Pipeline) -> None:
 
             if missing_cols:
                 st.warning(
-                    f"Warning: Your data is missing these required columns: {', '.join(missing_cols)}"
+                    f"Warning: Your data is missing these columns: {', '.join(missing_cols)}"
                 )
                 st.info("Required columns: pclass, sex, age, sibsp, parch, fare, embarked")
             # Add a button to make predictions
@@ -232,7 +231,10 @@ def batch_prediction_tab(model: Pipeline) -> None:
                     result_df = df.copy()
                     result_df["Predicted_Survival"] = predictions
                     result_df["Survival_Status"] = result_df["Predicted_Survival"].map(
-                        {0: "Did not survive", 1: "Survived"}
+                        {
+                            0: "Did not survive",
+                            1: "Survived",
+                        }
                     )
 
                     # Display results
