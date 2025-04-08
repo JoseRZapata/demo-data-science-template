@@ -55,9 +55,7 @@ def get_user_data() -> pd.DataFrame:
             label="Ticket class:", options=["1st", "2nd", "3rd"], horizontal=False
         )
     with col2:
-        user_data["sex"] = st.radio(
-            label="Sex:", options=["Woman", "Man"], horizontal=False
-        )
+        user_data["sex"] = st.radio(label="Sex:", options=["Woman", "Man"], horizontal=False)
     with col3:
         user_data["embarked"] = st.radio(
             label="Port of Embarkation:",  # hidden
@@ -71,11 +69,13 @@ def get_user_data() -> pd.DataFrame:
     # Follow the same data structure than in the Kaggle competition
     df["sex"] = df["sex"].map({"Man": "male", "Woman": "female"})
     df["pclass"] = df["pclass"].map({"1st": 1, "2nd": 2, "3rd": 3})
-    df["embarked"] = df["embarked"].map({
-        "Cherbourg": "C",
-        "Queenstown": "Q",
-        "Southampton": "S",
-    })
+    df["embarked"] = df["embarked"].map(
+        {
+            "Cherbourg": "C",
+            "Queenstown": "Q",
+            "Southampton": "S",
+        }
+    )
 
     return df
 
@@ -120,9 +120,7 @@ def preprocess_batch_data(df: pd.DataFrame) -> pd.DataFrame:
             processed_df["pclass"] = processed_df["pclass"].map(
                 lambda x: pclass_mapping.get(str(x).lower(), x)
             )
-            processed_df["pclass"] = pd.to_numeric(
-                processed_df["pclass"], errors="coerce"
-            )
+            processed_df["pclass"] = pd.to_numeric(processed_df["pclass"], errors="coerce")
 
     # Convert embarked values if needed
     if "embarked" in processed_df.columns:
@@ -223,40 +221,37 @@ def batch_prediction_tab(model: Pipeline) -> None:
                 st.warning(
                     f"Warning: Your data is missing these required columns: {', '.join(missing_cols)}"
                 )
-                st.info(
-                    "Required columns: pclass, sex, age, sibsp, parch, fare, embarked"
-                )
-            else:
-                # Add a button to make predictions
-                if st.button("Predict Survival"):
-                    with st.spinner("Processing data and making predictions..."):
-                        # Make predictions
-                        predictions = model.predict(df)
+                st.info("Required columns: pclass, sex, age, sibsp, parch, fare, embarked")
+            # Add a button to make predictions
+            elif st.button("Predict Survival"):
+                with st.spinner("Processing data and making predictions..."):
+                    # Make predictions
+                    predictions = model.predict(df)
 
-                        # Add predictions to the dataframe
-                        result_df = df.copy()
-                        result_df["Predicted_Survival"] = predictions
-                        result_df["Survival_Status"] = result_df[
-                            "Predicted_Survival"
-                        ].map({0: "Did not survive", 1: "Survived"})
+                    # Add predictions to the dataframe
+                    result_df = df.copy()
+                    result_df["Predicted_Survival"] = predictions
+                    result_df["Survival_Status"] = result_df["Predicted_Survival"].map(
+                        {0: "Did not survive", 1: "Survived"}
+                    )
 
-                        # Display results
-                        st.success("Predictions completed!")
-                        st.subheader("Prediction Results")
-                        st.dataframe(result_df)
+                    # Display results
+                    st.success("Predictions completed!")
+                    st.subheader("Prediction Results")
+                    st.dataframe(result_df)
 
-                        # Calculate survival rate
-                        survival_rate = predictions.mean() * 100
-                        st.metric("Overall Survival Rate", f"{survival_rate:.2f}%")
+                    # Calculate survival rate
+                    survival_rate = predictions.mean() * 100
+                    st.metric("Overall Survival Rate", f"{survival_rate:.2f}%")
 
-                        # Option to download results
-                        csv = result_df.to_csv(index=False)
-                        st.download_button(
-                            label="Download results as CSV",
-                            data=csv,
-                            file_name="titanic_predictions.csv",
-                            mime="text/csv",
-                        )
+                    # Option to download results
+                    csv = result_df.to_csv(index=False)
+                    st.download_button(
+                        label="Download results as CSV",
+                        data=csv,
+                        file_name="titanic_predictions.csv",
+                        mime="text/csv",
+                    )
         except Exception as e:
             st.error(f"Error processing the file: {e}")
             st.info("Please make sure your CSV file is properly formatted.")
@@ -265,15 +260,17 @@ def batch_prediction_tab(model: Pipeline) -> None:
 
         # Show sample format
         st.subheader("Sample CSV format:")
-        sample_data = pd.DataFrame({
-            "pclass": [1, 2, 3],
-            "sex": ["female", "male", "female"],
-            "age": [29, 35, 15],
-            "sibsp": [0, 1, 0],
-            "parch": [0, 0, 1],
-            "fare": [211.3, 26.0, 7.75],
-            "embarked": ["S", "C", "Q"],
-        })
+        sample_data = pd.DataFrame(
+            {
+                "pclass": [1, 2, 3],
+                "sex": ["female", "male", "female"],
+                "age": [29, 35, 15],
+                "sibsp": [0, 1, 0],
+                "parch": [0, 0, 1],
+                "fare": [211.3, 26.0, 7.75],
+                "embarked": ["S", "C", "Q"],
+            }
+        )
         st.dataframe(sample_data)
 
 
