@@ -1,0 +1,6 @@
+model:
+  _target_: sklearn.ensemble.RandomForestClassifier
+  parameters:
+    criterion: 'entropy'
+    max_depth: 10
+    max_features: 2

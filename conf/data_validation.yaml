@@ -1,0 +1,61 @@
+columns:
+  pclass:
+    dtype: Int64
+    nullable: false
+    checks:
+      - in_range:
+          min: 1
+          max: 3
+
+  sex:
+    dtype: String
+    nullable: false
+    checks:
+      - isin:
+          allowed_values: ["male", "female"]
+
+  age:
+    dtype: Float64
+    nullable: true
+    checks:
+      - in_range:
+          min: 0
+          max: 120
+
+  sibsp:
+    dtype: Int64
+    nullable: false
+    checks:
+      - in_range:
+          min: 0
+          max: 10
+
+  parch:
+    dtype: Int64
+    nullable: false
+    checks:
+      - in_range:
+          min: 0
+          max: 10
+
+  fare:
+    dtype: Float64
+    nullable: true
+    checks:
+      - in_range:
+          min: 0
+          max: 600
+
+  embarked:
+    dtype: String
+    nullable: true
+    checks:
+      - isin:
+          allowed_values: ["C", "Q", "S"]
+
+  survived:
+    dtype: Int64
+    nullable: false
+    checks:
+      - isin:
+          allowed_values: [0, 1]
