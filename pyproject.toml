@@ -11,7 +11,7 @@ dependencies = [
     "scipy>=1.13.1",
     "deepchecks>=0.19.1",
     "pandas>=2.2.3",
-    "numpy>=2.0.2",
+    "numpy<2.0",
     "pyarrow>=19.0.0",
     "streamlit>=1.42.0",
     "loguru>=0.7.3",
@@ -32,10 +32,13 @@ dev = [
     "pytest-cookies>=0.7.0",
     "pytest-cov>=6.0.0",
     "pandas-stubs>=2.2.3.241126",
-    "ydata-profiling[notebooks]>=4.12.1",
+    "ydata-profiling[notebook]>=4.12.1",
     "pytest-mock>=3.14.0",
     "watermark>=2.5.0",
     "mlflow>=2.22.0",
+    "deepchecks>=0.19.1",
+    "anywidget>=0.9.18",
+    "kaleido==0.2.1",
 ]
 docs = [
     "mkdocs>=1.6.1",
