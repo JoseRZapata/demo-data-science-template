@@ -25,6 +25,14 @@ In Linux / MAC OS
 
 Enjoy!!
 
+## FastAPI Demo
+
+To run the fastapi demo, you can run the following command:
+
+`fastapi dev src/inference/model_deploy.py`
+
+Then, you can access the API Documentation at <http://127.0.0.1:8000/docs>
+
 ## Streamlit Demo
 
 To run the streamlit demo, you can run the following command:
