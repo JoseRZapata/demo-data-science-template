@@ -25,6 +25,14 @@ In Linux / MAC OS
 
 Enjoy!!
 
+## FastAPI Demo
+
+To run the fastapi demo, you can run the following command:
+
+`fastapi dev src/inference/model_deploy.py`
+
+Then, you can access the API Documentation at <http://127.0.0.1:8000/docs>
+
 ## Streamlit Demo
 
 To run the streamlit demo, you can run the following command:
@@ -38,6 +46,10 @@ To run the simple training, you can run the following command in the environment
 `python src/pipelines/simple_train_pipeline.py`
 
 Created Trained model will be in: `models/first_basic_model.joblib`
+
+## Deploy model with fastapi and docker
+
+the model trained in this repository can be deploy with fastapi and docker, go to this repository to see how to do it: [fastapi-docker-model-deploy](https://github.com/JoseRZapata/demo-deploy-model-fastapi-docker)
 
 ## 🗃️ Project structure
 
