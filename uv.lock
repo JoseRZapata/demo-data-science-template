@@ -713,11 +713,6 @@ docs = [
     { name = "mkdocstrings", extra = ["python"] },
     { name = "pymdown-extensions" },
 ]
-fastapi = [
-    { name = "fastapi", extra = ["standard"] },
-    { name = "pandas" },
-    { name = "scikit-learn" },
-]
 
 [package.metadata]
 requires-dist = [
@@ -757,11 +752,6 @@ docs = [
     { name = "mkdocs-material", specifier = ">=9.5.49" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=0.28.1" },
     { name = "pymdown-extensions", specifier = "~=10.14.3" },
-]
-fastapi = [
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
-    { name = "pandas", specifier = ">=2.2.3" },
-    { name = "scikit-learn", specifier = ">=1.6.1" },
 ]
 
 [[package]]
