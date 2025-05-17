@@ -3,6 +3,9 @@ import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
+# Constante para el mensaje de error
+MODEL_NOT_FOUND = "Model not found"
+
 
 class TitanicInput(BaseModel):
     age: int = Field(default=30, ge=0, le=100)
@@ -59,6 +62,9 @@ def predict(input: TitanicInput) -> TitanicOutput:
     # Load the model
     model_name = "titanic_classification-random_forest-v1.joblib"
     model = joblib.load("models/" + model_name)
+
+    if model is None:
+        raise ValueError(MODEL_NOT_FOUND)  # Usar la constante del mensaje de error
 
     # Make prediction
     prediction = model.predict(input_df)[0]
