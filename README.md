@@ -47,6 +47,10 @@ To run the simple training, you can run the following command in the environment
 
 Created Trained model will be in: `models/first_basic_model.joblib`
 
+## Deploy model with fastapi and docker
+
+the model trained in this repository can be deploy with fastapi and docker, go to this repository to see how to do it: [fastapi-docker-model-deploy](https://github.com/JoseRZapata/demo-deploy-model-fastapi-docker)
+
 ## 🗃️ Project structure
 
 - [Data structure]
