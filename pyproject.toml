@@ -39,13 +39,13 @@ dev = [
     "mlflow>=2.22.0",
     "deepchecks>=0.19.1",
     "anywidget>=0.9.18",
-    "kaleido==0.2.1",
+    "kaleido==1.0.0",
 ]
 docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.49",
     "mkdocstrings[python]>=0.28.1",
-    "pymdown-extensions~=10.14.3",
+    "pymdown-extensions~=10.16.1",
 ]
 
 [tool.uv]
