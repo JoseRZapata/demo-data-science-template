@@ -39,7 +39,7 @@ dev = [
     "mlflow>=2.22.0",
     "deepchecks>=0.19.1",
     "anywidget>=0.9.18",
-    "kaleido==1.0.0",
+    "kaleido==1.1.0",
 ]
 docs = [
     "mkdocs>=1.6.1",
