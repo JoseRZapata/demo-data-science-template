@@ -141,10 +141,13 @@ print(f"evaluation metric: {metric_result}")
 
 # Save the model
 # %%
-DATA_MODEL = Path.cwd().resolve().parents[1] / "models"
+# DATA_MODEL = Path.cwd().resolve().parents[1] / "models"
+# Use a more robust way to find the models directory relative to this script
+DATA_MODEL = Path(__file__).resolve().parents[2] / "models"
+DATA_MODEL.mkdir(parents=True, exist_ok=True)
 # %%
 dump(
     best_data_model_pipeline,
-    DATA_MODEL / "model.joblib",
+    DATA_MODEL / "titanic_classification-random_forest-v1.joblib",
     protocol=5,
 )
