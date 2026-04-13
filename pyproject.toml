@@ -15,7 +15,7 @@ dependencies = [
     "pyarrow>=19.0.0",
     "streamlit>=1.42.0",
     "loguru>=0.7.3",
-    "fastapi[standard]>=0.115.12",
+    "fastapi[standard]>=0.135.3",
 ]
 
 [project.urls]
@@ -29,22 +29,22 @@ dev = [
     "matplotlib>=3.9.4",
     "seaborn==0.13.2",
     "pre-commit>=4.1.0",
-    "pytest>=8.3.4",
+    "pytest>=9.0.3",
     "pytest-cookies>=0.7.0",
     "pytest-cov>=6.0.0",
     "pandas-stubs>=2.2.3.241126",
-    "ydata-profiling[notebook]>=4.12.1",
+    "ydata-profiling[notebook]>=4.18.1",
     "pytest-mock>=3.14.0",
     "watermark>=2.5.0",
-    "mlflow>=2.22.0",
+    "mlflow>=3.11.1",
     "deepchecks>=0.19.1",
-    "anywidget>=0.9.18",
+    "anywidget>=0.10.0",
     "kaleido==1.2.0",
 ]
 docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.49",
-    "mkdocstrings[python]>=0.28.1",
+    "mkdocstrings[python]>=1.0.3",
     "pymdown-extensions~=10.18",
 ]
 
