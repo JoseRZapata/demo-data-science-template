@@ -15,7 +15,7 @@ dependencies = [
     "pyarrow>=19.0.0",
     "streamlit>=1.42.0",
     "loguru>=0.7.3",
-    "fastapi[standard]>=0.135.3",
+    "fastapi[standard]>=0.136.0",
 ]
 
 [project.urls]
@@ -33,7 +33,7 @@ dev = [
     "pytest-cookies>=0.7.0",
     "pytest-cov>=6.0.0",
     "pandas-stubs>=2.2.3.241126",
-    "ydata-profiling[notebook]>=4.18.1",
+    "ydata-profiling[notebook]>=4.18.3",
     "pytest-mock>=3.14.0",
     "watermark>=2.5.0",
     "mlflow>=3.11.1",
@@ -44,7 +44,7 @@ dev = [
 docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.49",
-    "mkdocstrings[python]>=1.0.3",
+    "mkdocstrings[python]>=1.0.4",
     "pymdown-extensions~=10.18",
 ]
 
