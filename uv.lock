@@ -933,7 +933,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "deepchecks", specifier = ">=0.19.1" },
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.136.0" },
+    { name = "fastapi", extras = ["standard"], specifier = ">=0.136.1" },
     { name = "hydra-core", specifier = ">=1.1.1" },
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "numpy", specifier = "<3.0" },
@@ -954,14 +954,14 @@ dev = [
     { name = "matplotlib", specifier = ">=3.9.4" },
     { name = "mlflow", specifier = ">=3.11.1" },
     { name = "pandas-stubs", specifier = ">=2.2.3.241126" },
-    { name = "pre-commit", specifier = ">=4.1.0" },
+    { name = "pre-commit", specifier = ">=4.6.0" },
     { name = "pytest", specifier = ">=9.0.3" },
     { name = "pytest-cookies", specifier = ">=0.7.0" },
     { name = "pytest-cov", specifier = ">=6.0.0" },
     { name = "pytest-mock", specifier = ">=3.14.0" },
     { name = "seaborn", specifier = "==0.13.2" },
     { name = "watermark", specifier = ">=2.5.0" },
-    { name = "ydata-profiling", extras = ["notebook"], specifier = ">=4.18.3" },
+    { name = "ydata-profiling", extras = ["notebook"], specifier = ">=4.18.4" },
 ]
 docs = [
     { name = "mkdocs", specifier = ">=1.6.1" },
@@ -1038,7 +1038,7 @@ wheels = [
 
 [[package]]
 name = "fastapi"
-version = "0.136.0"
+version = "0.136.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-doc" },
@@ -1047,9 +1047,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "typing-inspection" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4e/d9/e66315807e41e69e7f6a1b42a162dada2f249c5f06ad3f1a95f84ab336ef/fastapi-0.136.0.tar.gz", hash = "sha256:cf08e067cc66e106e102d9ba659463abfac245200752f8a5b7b1e813de4ff73e", size = 396607, upload-time = "2026-04-16T11:47:13.623Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5d/45/c130091c2dfa061bbfe3150f2a5091ef1adf149f2a8d2ae769ecaf6e99a2/fastapi-0.136.1.tar.gz", hash = "sha256:7af665ad7acfa0a3baf8983d393b6b471b9da10ede59c60045f49fbc89a0fa7f", size = 397448, upload-time = "2026-04-23T16:49:44.046Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/26/a3/0bd5f0cdb0bbc92650e8dc457e9250358411ee5d1b65e42b6632387daf81/fastapi-0.136.0-py3-none-any.whl", hash = "sha256:8793d44ec7378e2be07f8a013cf7f7aa47d6327d0dfe9804862688ec4541a6b4", size = 117556, upload-time = "2026-04-16T11:47:11.922Z" },
+    { url = "https://files.pythonhosted.org/packages/5a/ff/2e4eca3ade2c22fe1dea7043b8ee9dabe47753349eb1b56a202de8af6349/fastapi-0.136.1-py3-none-any.whl", hash = "sha256:a6e9d7eeada96c93a4d69cb03836b44fa34e2854accb7244a1ece36cd4781c3f", size = 117683, upload-time = "2026-04-23T16:49:42.437Z" },
 ]
 
 [package.optional-dependencies]
@@ -3368,7 +3368,7 @@ wheels = [
 
 [[package]]
 name = "pre-commit"
-version = "4.5.1"
+version = "4.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cfgv" },
@@ -3377,9 +3377,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "virtualenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/f1/6d86a29246dfd2e9b6237f0b5823717f60cad94d47ddc26afa916d21f525/pre_commit-4.5.1.tar.gz", hash = "sha256:eb545fcff725875197837263e977ea257a402056661f09dae08e4b149b030a61", size = 198232, upload-time = "2025-12-16T21:14:33.552Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8e/22/2de9408ac81acbb8a7d05d4cc064a152ccf33b3d480ebe0cd292153db239/pre_commit-4.6.0.tar.gz", hash = "sha256:718d2208cef53fdc38206e40524a6d4d9576d103eb16f0fec11c875e7716e9d9", size = 198525, upload-time = "2026-04-21T20:31:41.613Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/19/fd3ef348460c80af7bb4669ea7926651d1f95c23ff2df18b9d24bab4f3fa/pre_commit-4.5.1-py2.py3-none-any.whl", hash = "sha256:3b3afd891e97337708c1674210f8eba659b52a38ea5f822ff142d10786221f77", size = 226437, upload-time = "2025-12-16T21:14:32.409Z" },
+    { url = "https://files.pythonhosted.org/packages/80/6e/4b28b62ecb6aae56769c34a8ff1d661473ec1e9519e2d5f8b2c150086b26/pre_commit-4.6.0-py2.py3-none-any.whl", hash = "sha256:e2cf246f7299edcabcf15f9b0571fdce06058527f0a06535068a86d38089f29b", size = 226472, upload-time = "2026-04-21T20:31:40.092Z" },
 ]
 
 [[package]]
@@ -5536,7 +5536,7 @@ wheels = [
 
 [[package]]
 name = "ydata-profiling"
-version = "4.18.3"
+version = "4.18.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dacite" },
@@ -5561,9 +5561,9 @@ dependencies = [
     { name = "visions", extra = ["type-image-path"] },
     { name = "wordcloud" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1b/90/fecdf08148ce205075eae12380726655fd3c52f323940d90abe07f137471/ydata_profiling-4.18.3.tar.gz", hash = "sha256:9817caa784b4065455c2f527a106edd74719b2dfb3a69c0b8760d5ed4ee27613", size = 331603, upload-time = "2026-04-16T23:49:07.871Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9d/a6/9fce390621ec3e51ab7b2deb855bbb81f8b6c44917fdcfa095624feb1f4a/ydata_profiling-4.18.4.tar.gz", hash = "sha256:c19a0b3dec081da024d18800ffcee0160b076edecef66ca55c75e00e6ac15e21", size = 331570, upload-time = "2026-04-22T23:14:44.287Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f3/0b/da00faee551dfc0b984b0b6b4fc049aa15e18dfdb987e94281d8c79f3112/ydata_profiling-4.18.3-py2.py3-none-any.whl", hash = "sha256:3482932fb6f49c182391bcdc564541406ffde8ead5c15305242e7dad419a34b2", size = 400782, upload-time = "2026-04-16T23:49:06.048Z" },
+    { url = "https://files.pythonhosted.org/packages/df/ad/9078a92da6587d2a1b2376a30ac1030d0e932deb535dc203bbc8c60170ff/ydata_profiling-4.18.4-py2.py3-none-any.whl", hash = "sha256:5db41d8251e0b4c529ed226aaab2b2c493df4c83a206c2d0e50843a62f214b90", size = 400791, upload-time = "2026-04-22T23:14:42.176Z" },
 ]
 
 [package.optional-dependencies]
