@@ -13,7 +13,7 @@ dependencies = [
     "pandas>=2.2.3",
     "numpy<3.0",
     "pyarrow>=19.0.0",
-    "streamlit>=1.42.0",
+    "streamlit>=1.57.0",
     "loguru>=0.7.3",
     "fastapi[standard]>=0.136.1",
 ]
@@ -38,7 +38,7 @@ dev = [
     "watermark>=2.5.0",
     "mlflow>=3.11.1",
     "deepchecks>=0.19.1",
-    "anywidget>=0.10.0",
+    "anywidget>=0.11.0",
     "kaleido==1.2.0",
 ]
 docs = [
