@@ -45,7 +45,7 @@ docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.49",
     "mkdocstrings[python]>=1.0.4",
-    "pymdown-extensions~=10.18",
+    "pymdown-extensions~=10.21",
 ]
 
 [tool.uv]
