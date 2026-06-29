@@ -15,7 +15,7 @@ dependencies = [
     "pyarrow>=24.0.0",
     "streamlit>=1.58.0",
     "loguru>=0.7.3",
-    "fastapi[standard]>=0.138.0",
+    "fastapi[standard]>=0.138.1",
 ]
 
 [project.urls]
@@ -45,7 +45,7 @@ docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.49",
     "mkdocstrings[python]>=1.0.4",
-    "pymdown-extensions~=10.21",
+    "pymdown-extensions~=11.0",
 ]
 
 [tool.uv]
