@@ -96,11 +96,13 @@ def preprocess_batch_data(df: pd.DataFrame) -> pd.DataFrame:
     # Convert sex values if needed
     if "sex" in processed_df.columns:
         processed_df["sex"] = processed_df["sex"].map(
-            lambda x: "male"
-            if x.lower() in ["man", "male", "m"]
-            else "female"
-            if x.lower() in ["woman", "female", "f"]
-            else x
+            lambda x: (
+                "male"
+                if x.lower() in ["man", "male", "m"]
+                else "female"
+                if x.lower() in ["woman", "female", "f"]
+                else x
+            )
         )
 
     # Convert pclass values if needed
